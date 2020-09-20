@@ -21,3 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.prefs
+Lista 1/Missao_1_1/.classpath
+Lista 1/Missao_1_1/.project
+Lista 1/Missao_1_2/.classpath
+Lista 1/Missao_1_2/.project
+Lista 1/Missao_1_3/.classpath
+Lista 1/Missao_1_3/.project
+Lista 1/Missao_1_4/.classpath
+Lista 1/Missao_1_4/.project
