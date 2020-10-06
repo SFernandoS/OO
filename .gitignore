@@ -32,3 +32,18 @@ Lista 1/Missao_1_4/.classpath
 Lista 1/Missao_1_4/.project
 Projeto Final/Projeto Final/.classpath
 Projeto Final/Projeto Final/.project
+*.xmi
+.metadata/.mylyn/.taskListIndex/segments_1
+.metadata/.lock
+.metadata/.lock
+*.lock
+*.version
+*.index
+*.resources
+.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
+.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
+*.xml
+.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+.metadata/.plugins/org.eclipse.ui.intro/introstate
+*.dat
+*.ini
