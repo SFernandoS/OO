@@ -22,6 +22,6 @@ public class Pessoa {
 		return CPF;
 	}
 	public void setCPF(int CPF) {
-		this.CPF =CPF;
+		this.CPF = CPF;
 	}
 }

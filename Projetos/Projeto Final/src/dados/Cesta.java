@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Cesta {
 	private ArrayList<Livro> itens;
-	private float desconto;
-	private float total;
+	private double desconto;
 
 	public Cesta() {
 		this.itens = new ArrayList<Livro>();
 		this.desconto = 0F;
-		this.total = 0f;
 	}
 
 	public ArrayList<Livro> getItens() {
@@ -21,22 +19,42 @@ public class Cesta {
 		itens.add(novoItem);
 	}
 
-	public float getDesconto() {
+	public double getDesconto() {
 		return desconto;
 	}
 
-	public void setDesconto(float desconto) {
+	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
 
-	public float getTotal() {
-		return total;
-	}
-
-	public void setTotal(float total) {
-		this.total = total;
+	public double getTotal() {
+		double auxiliar = 0;
+		
+		for (int i = 0; i < itens.size(); i++) 
+			auxiliar += itens.get(i).getPreco();
+		
+		return auxiliar;
 	}
 	
+	public double getTotal(float desconto) {
+		double auxiliar = 0;
+		
+		for (int i = 0; i < itens.size(); i++) 
+			auxiliar += itens.get(i).getPreco();
+		
+		return auxiliar - desconto;
+	}
+	
+	public void listaDeCompras() {
+		System.out.println("Lista de Compras\n");
+		for (int i = 0; i < itens.size(); i++) {
+			System.out.println("\t\t" + itens.get(0).getTitulo()+":");
+			System.out.println("autor: " + itens.get(0).getAutor()+";");
+			System.out.println("Editora: " + itens.get(0).getEditora()+";");
+			System.out.println("ISNB: " + itens.get(0).getIsbn()+";");
+			System.out.println("Preco: " + itens.get(0).getPreco()+ ".\n");
+		}
+	}
 	
 }
 

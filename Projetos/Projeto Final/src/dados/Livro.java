@@ -5,13 +5,15 @@ public class Livro {
 	private String isbn;
 	private String autor;
 	private String editora;
-	private String preco;
+	private int genero;  // 0 - infantil; 1 - tecnico; 2 - ficcao, 3 - outros. 
+	private double preco;
 	
-	public Livro(String titulo, String isbn, String autor, String editora, String preco) {
+	public Livro(String titulo, String isbn, String autor, String editora, double preco, int genero) {
 		this.titulo = titulo;
 		this.isbn = isbn;
 		this.autor = autor;
 		this.editora = editora;
+		this.genero = genero;
 		this.preco = preco;
 	}
 	
@@ -47,11 +49,19 @@ public class Livro {
 		this.editora = editora;
 	}
 	
-	public String getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 	
-	public void setPreco(String preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+
+	public int getGenero() {
+		return genero;
+	}
+
+	public void setGenero(int genero) {
+		this.genero = genero;
 	}
 }
