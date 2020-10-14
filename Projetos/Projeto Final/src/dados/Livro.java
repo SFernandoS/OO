@@ -5,16 +5,18 @@ public class Livro {
 	private String isbn;
 	private String autor;
 	private String editora;
+	private int quantidade;
 	private int genero;  // 0 - infantil; 1 - tecnico; 2 - ficcao, 3 - outros. 
 	private double preco;
 	
-	public Livro(String titulo, String isbn, String autor, String editora, double preco, int genero) {
+	public Livro(String titulo, String isbn, String autor, String editora, double preco, int genero, int quantidade) {
 		this.titulo = titulo;
 		this.isbn = isbn;
 		this.autor = autor;
 		this.editora = editora;
 		this.genero = genero;
 		this.preco = preco;
+		this.quantidade = quantidade;
 	}
 	
 	public String getTitulo() {
@@ -63,5 +65,13 @@ public class Livro {
 
 	public void setGenero(int genero) {
 		this.genero = genero;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 }
