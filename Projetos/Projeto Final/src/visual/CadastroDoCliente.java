@@ -1,9 +1,8 @@
 package visual;
 
-import java.awt.Button;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +16,7 @@ import dados.Livraria;
 import servicos.Servicos;
 import validacao.Validacao;
 
+@SuppressWarnings("serial")
 public class CadastroDoCliente extends JPanel {
 	
 	static private JTextField nome;
@@ -26,11 +26,13 @@ public class CadastroDoCliente extends JPanel {
 	public static void cadastroDoCliente(JPanel contenPane, Livraria livraria) {
 	
 		//Design
-		Panel cadClientePanel = new Panel();
+		JPanel cadClientePanel = new JPanel();
 		contenPane.add(cadClientePanel, "cadCliente");
 		cadClientePanel.setLayout(null);
+		cadClientePanel.setBackground(new Color(204, 204, 102));
+
 		
-		Button btnVoltar = new Button("Voltar");
+		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -89,9 +91,6 @@ public class CadastroDoCliente extends JPanel {
 							nome.getText(), Integer.parseInt(cpf.getText()), Integer.parseInt(cep.getText())));
 					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 				}
-				else 
-					JOptionPane.showMessageDialog(null, "O nome tem que ser maior que 2 caracteres, CEP e CPF precisam ser numeros, apenas!");
-					
 			}
 		});
 		

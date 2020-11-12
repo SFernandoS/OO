@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Cesta {
 	private ArrayList<Livro> itens;
-	private double desconto;
+	private String endereco;
+	private double total;
+	private boolean pendente;
 
 	public Cesta() {
 		this.itens = new ArrayList<Livro>();
-		this.desconto = 0F;
+		this.total = 0;
+		this.setPendente(true);
 	}
 
 	public ArrayList<Livro> getItens() {
@@ -19,30 +22,20 @@ public class Cesta {
 		itens.add(novoItem);
 	}
 
-	public double getDesconto() {
-		return desconto;
-	}
-
-	public void setDesconto(double desconto) {
-		this.desconto = desconto;
-	}
-
-	public double getTotal() {
-		double auxiliar = 0;
-		
+	
+	public void setTotal() {
 		for (int i = 0; i < itens.size(); i++) 
-			auxiliar += itens.get(i).getPreco();
-		
-		return auxiliar;
+			this.total += itens.get(i).getPreco();
 	}
 	
-	public double getTotal(float desconto) {
-		double auxiliar = 0;
-		
+	public void setTotal(double desconto) {
 		for (int i = 0; i < itens.size(); i++) 
-			auxiliar += itens.get(i).getPreco();
-		
-		return auxiliar - desconto;
+		this.total += itens.get(i).getPreco();
+		this.total = this.total*desconto;
+	}
+	
+	public double getTotal() {
+		return total;
 	}
 	
 	public void listaDeCompras() {
@@ -54,6 +47,22 @@ public class Cesta {
 			System.out.println("ISNB: " + itens.get(0).getIsbn()+";");
 			System.out.println("Preco: " + itens.get(0).getPreco()+ ".\n");
 		}
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public boolean isPendente() {
+		return pendente;
+	}
+
+	public void setPendente(boolean pendente) {
+		this.pendente = pendente;
 	}
 	
 }

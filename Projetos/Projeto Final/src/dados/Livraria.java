@@ -3,12 +3,14 @@ package dados;
 import java.util.ArrayList;
 
 public class Livraria extends Catalogo{
+	private Catalogo catalogo;
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Funcionario> funcionarios;
 	
 	public Livraria() {
 		this.clientes = new ArrayList<Cliente>();
 		this.funcionarios = new ArrayList<Funcionario>();
+		this.catalogo = new Catalogo();
 	}
 	
 	public ArrayList<Cliente> getClientes() {
@@ -24,6 +26,26 @@ public class Livraria extends Catalogo{
 
 	public void setFuncionarios(Funcionario novoFuncionario) {
 		funcionarios.add(novoFuncionario);
+	}
+	
+	public Catalogo getCatalogo() {
+		return catalogo;
+	}
+
+	public void setCatalogoInfantil(Livro novoLivroInfantil) {
+		catalogo.setInfantil(novoLivroInfantil);
+	}
+	
+	public void setCatalogoFiccao(Livro novoLivroFiccao) {
+		catalogo.setFiccao(novoLivroFiccao);
+	}
+	
+	public void setCatalogoTecnico(Livro novoLivroTecnico) {
+		catalogo.setTecnico(novoLivroTecnico);
+	}
+	
+	public void setCatalogoOutros(Livro novoLivroOutros) {
+		catalogo.setOutros(novoLivroOutros);
 	}
 	
 	public void clientesCadastrados() {
@@ -46,11 +68,4 @@ public class Livraria extends Catalogo{
 		}
 	}
 	
-	public void pagamentosEfetuados() {
-		System.out.println("Pagamentos Efetuados\n\n");
-		
-		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println(clientes.get(i).getNome() + ": " + clientes.get(i).getCesta().getTotal());
-		}
-	}
 }

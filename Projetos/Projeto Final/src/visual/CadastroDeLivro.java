@@ -1,6 +1,5 @@
 package visual;
 
-import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Choice;
 import java.awt.Color;
@@ -10,11 +9,16 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dados.Livraria;
+import servicos.Servicos;
+import validacao.Validacao;
 
+@SuppressWarnings("serial")
 public class CadastroDeLivro extends JPanel {
 	
 	static private JTextField textTitulo;
@@ -26,11 +30,13 @@ public class CadastroDeLivro extends JPanel {
 	
 	public static void cadastroDeLivro(JPanel contenPane, Livraria livraria) {
 		
-		Panel cadastroLivroPanel = new Panel();
+		JPanel cadastroLivroPanel = new JPanel();
 		contenPane.add(cadastroLivroPanel, "cadLivro");
 		cadastroLivroPanel.setLayout(null);
+		cadastroLivroPanel.setBackground(new Color(204, 204, 102));
+
 		
-		Button btnVoltar = new Button("Voltar");
+		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -115,12 +121,53 @@ public class CadastroDeLivro extends JPanel {
 		choiceGenero.setBackground(new Color(204, 204, 153));
 		choiceGenero.setBounds(142, 480, 300, 25);
 		cadastroLivroPanel.add(choiceGenero);
-		choiceGenero.add("nao implementado");
+		choiceGenero.add("Infantil");
+		choiceGenero.add("Tecnico");
+		choiceGenero.add("Ficcao");
+		choiceGenero.add("Outros");
 		
-		Button btnFim = new Button("Finalizar");
+		
+		JButton btnFim = new JButton("Finalizar");
 		btnFim.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnFim.setBounds(234, 510, 116, 30);
 		cadastroLivroPanel.add(btnFim);
+		btnFim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if(Validacao.validaTitulo(textTitulo.getText()) && Validacao.validaIsbn(textISBN.getText()) && Validacao.validaAutor(textAutor.getText())
+							&& Validacao.validaEditora(textEditora.getText()) && Validacao.validaPreco(Double.parseDouble(textPreco.getText()))
+							&& Validacao.validaQuantidade(Integer.parseInt(textQuantidade.getText()))){
+						switch (choiceGenero.getSelectedIndex()) { // 0 - infantil; 1 - tecnico; 2 - ficcao, 3 - outros. 
+						case 0:
+							livraria.setCatalogoInfantil(Servicos.cadastraLivro(textTitulo.getText(), textISBN.getText(), textAutor.getText(),
+									textEditora.getText(),Double.parseDouble(textPreco.getText()),choiceGenero.getSelectedIndex(),
+									Integer.parseInt(textQuantidade.getText()) ));
+							break;
+						case 1:
+							livraria.setCatalogoInfantil(Servicos.cadastraLivro(textTitulo.getText(), textISBN.getText(), textAutor.getText(),
+									textEditora.getText(),Double.parseDouble(textPreco.getText()),choiceGenero.getSelectedIndex(),
+									Integer.parseInt(textQuantidade.getText()) ));
+							break;
+						case 2:
+							livraria.setCatalogoInfantil(Servicos.cadastraLivro(textTitulo.getText(), textISBN.getText(), textAutor.getText(),
+									textEditora.getText(),Double.parseDouble(textPreco.getText()),choiceGenero.getSelectedIndex(),
+									Integer.parseInt(textQuantidade.getText()) ));
+							break;
+						case 3:
+							livraria.setCatalogoInfantil(Servicos.cadastraLivro(textTitulo.getText(), textISBN.getText(), textAutor.getText(),
+									textEditora.getText(),Double.parseDouble(textPreco.getText()),choiceGenero.getSelectedIndex(),
+									Integer.parseInt(textQuantidade.getText()) ));
+							break;
+						default:
+						}
+						JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+					}
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Campos nao podem ficar vazio!");
+				}
+			
+			}
+		});
 		
 		//Exibição
 		CardLayout cadLivro = (CardLayout) (contenPane.getLayout());

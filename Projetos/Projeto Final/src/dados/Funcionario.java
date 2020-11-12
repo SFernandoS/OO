@@ -2,8 +2,9 @@ package dados;
 
 import java.util.ArrayList;
 
+
 public class Funcionario extends Pessoa{
-	private ArrayList<Pedido> vendas;
+	private ArrayList<Cesta> vendas;
 
 	public Funcionario() {
 		super();
@@ -11,14 +12,14 @@ public class Funcionario extends Pessoa{
 
 	public Funcionario(String nome, int CPF) {
 		super(nome, CPF);
-		vendas = new ArrayList<Pedido>();
+		vendas = new ArrayList<Cesta>();
 	}
 	
-	public ArrayList<Pedido> getVendas() {
+	public ArrayList<Cesta> getVendas() {
 		return vendas;
 	}
 
-	public void setVendas(Pedido novoPedido) {
+	public void setVendas(Cesta novoPedido) {
 		vendas.add(novoPedido);
 	}
 }

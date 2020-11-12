@@ -3,27 +3,21 @@ package visual;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dados.Livraria;
-import servicos.Servicos;
-import validacao.Validacao;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
-import java.awt.Choice;
-import java.awt.Button;
 import java.awt.Panel;
-import java.awt.Label;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class Menu extends JFrame{
 
 	private JPanel contenPane;
@@ -62,13 +56,13 @@ public class Menu extends JFrame{
 		contenPane.add(inicio, "inicio");
 		inicio.setLayout(null);
 		
-		Label welcome = new Label("Bem vindo(a)");
+		JLabel welcome = new JLabel("Bem vindo(a)");
 		welcome.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 40));
 		welcome.setBounds(157, 35, 259, 40);
 		inicio.add(welcome);
 		
 		//Catálogo
-		Button catalogo = new Button("Catalogo");
+		JButton catalogo = new JButton("Catalogo");
 		catalogo.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		inicio.add(catalogo);
 		catalogo.setBounds(117, 100, 350, 50);
@@ -79,7 +73,7 @@ public class Menu extends JFrame{
 		});
 		
 		//Estoque
-		Button livroEstoque = new Button("Estoque");
+		JButton livroEstoque = new JButton("Estoque");
 		livroEstoque.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		livroEstoque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,7 +84,7 @@ public class Menu extends JFrame{
 		inicio.add(livroEstoque);
 		
 		//Clientes cadastrados
-		Button clienteCadastrados = new Button("Cadastrados");
+		JButton clienteCadastrados = new JButton("Cadastrados");
 		clienteCadastrados.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		clienteCadastrados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,7 +95,7 @@ public class Menu extends JFrame{
 		inicio.add(clienteCadastrados);
 		
 		//Pagamentos Efetuados
-		Button pagamentosEfetuados = new Button("Pagamentos efetuados");
+		JButton pagamentosEfetuados = new JButton("Pagamentos efetuados");
 		pagamentosEfetuados.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		pagamentosEfetuados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +106,7 @@ public class Menu extends JFrame{
 		inicio.add(pagamentosEfetuados);
 		
 		//Lista por perfil
-		Button listaPerfil = new Button("Lista por perfil");
+		JButton listaPerfil = new JButton("Lista por perfil");
 		listaPerfil.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		listaPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,7 +117,7 @@ public class Menu extends JFrame{
 		inicio.add(listaPerfil);
 
 		//Cadastro de Livro
-		Button cadastroLivro = new Button("Cadastrar livro");
+		JButton cadastroLivro = new JButton("Cadastrar livro");
 		cadastroLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastroDeLivro.cadastroDeLivro(contenPane, livraria);
