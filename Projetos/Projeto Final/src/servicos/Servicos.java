@@ -28,16 +28,14 @@ public class Servicos extends Main {
 		int escolha = JOptionPane.YES_NO_OPTION;
 		
 		livraria.getClientes().get(numeroDoCliente).getCesta().setItens(livraria.getCatalogo().getInfantil().get(indexDoChoice));
-		//for (int i = 0; i <livraria.getClientes().get(numeroDoCliente).getCesta().getItens().size(); i++)
-			//JOptionPane.showMessageDialog(null, livraria.getClientes().get(numeroDoCliente).getCesta().getItens().get(i).getTitulo());
 		JOptionPane.showMessageDialog(null, "Compra realizada com sucesso");
 		
-		JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?",null, escolha);
+		escolha = JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?",null, escolha);
 		if (escolha == JOptionPane.YES_OPTION)
 			finalizaCompra(livraria, numeroDoCliente);		
 	}
 	
-public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
+	public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 		int escolha = JOptionPane.YES_OPTION;
 		
 		String endereco =JOptionPane.showInputDialog("Endereco completo: ");
@@ -50,12 +48,13 @@ public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 		livraria.getClientes().get(numeroDoCliente).getCesta().setEndereco(endereco);
 		
 		if (pagamento == 0) 
-			livraria.getClientes().get(numeroDoCliente).getCesta().setTotal();
+			livraria.getClientes().get(numeroDoCliente).getCesta().setTotal(0.90);
 		else
-			livraria.getClientes().get(numeroDoCliente).getCesta().setTotal(0.10);
+			livraria.getClientes().get(numeroDoCliente).getCesta().setTotal();
 		
-		JOptionPane.showConfirmDialog(null, "Deseja confimar a compra?",null, escolha);
-		if (escolha == JOptionPane.YES_OPTION)
+		escolha = JOptionPane.showConfirmDialog(null, "Deseja confimar a compra?",null, escolha);
+		
+		if (escolha == 0)
 			livraria.getClientes().get(numeroDoCliente).getCesta().setPendente(false);
 	}
 
@@ -63,7 +62,7 @@ public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 		String nomeDoClienteInput = null;
 		int numeroDoCliente = -1;
 		
-		//Encontra o cliente
+			//Encontra o cliente
 			try {
 				nomeDoClienteInput = JOptionPane.showInputDialog("Digite o nome do cliente:");
 				nomeDoClienteInput = nomeDoClienteInput.toLowerCase();
@@ -81,15 +80,44 @@ public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 					CardLayout cadastro = (CardLayout) (contenPane.getLayout());
 					cadastro.show(contenPane, "catalogo");
 				}
+				else {
+					livraria.getClientes().get(numeroDoCliente).getCesta().setPendente(false);
+					JOptionPane.showMessageDialog(null, "Venda confirmada com sucesso");
+				}
 				
-				livraria.getClientes().get(numeroDoCliente).getCesta().setPendente(false);
 				
 			}catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "entrada invalida");
 				//voltaCliente(contenPane);
-			}
-
-			JOptionPane.showConfirmDialog(null, "Venda confirmada com sucesso");
+			}			
+	}
+	
+	public static int procuraCliente(Livraria livraria, JPanel contenPane) {
+		int numeroDoCliente = -1;
+		String nomeDoClienteInput;
+		try {
+			nomeDoClienteInput = JOptionPane.showInputDialog("Digite o nome do cliente:");
+			nomeDoClienteInput = nomeDoClienteInput.toLowerCase();
+			nomeDoClienteInput = Character.toUpperCase(nomeDoClienteInput.charAt(0)) + nomeDoClienteInput.substring(1);		
 			
+			//Guarda o cliente
+			for (int i = 0; i < livraria.getClientes().size(); i++)
+				if (nomeDoClienteInput.equals(livraria.getClientes().get(i).getNome())){
+					numeroDoCliente = i;
+				}
+			
+			//Verifica se encontrou o cliente
+			if (numeroDoCliente == -1) {
+				JOptionPane.showMessageDialog(null, "Cliente nao encontrado");
+				CardLayout cadastro = (CardLayout) (contenPane.getLayout());
+				cadastro.show(contenPane, "catalogo");
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "entrada invalida");
+			CardLayout estoque = (CardLayout) (contenPane.getLayout());
+			estoque.show(contenPane, "catalogo");
+		}
+		return numeroDoCliente;
 	}
 }

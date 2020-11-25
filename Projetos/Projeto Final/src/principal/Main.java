@@ -21,9 +21,10 @@ public class Main {
 		livraria.setCatalogoInfantil(Servicos.cadastraLivro("Chapéuzinho Vermelho", "6348", "Charles Perrault",
 				"LiteraturaBr",29.27,0, 3));
 		
+		livraria.getClientes().get(0).getCesta().setItens(
+				Servicos.cadastraLivro("O Pequeno Principe", "3625", "Antonie de Saint","Global",13.27, 0, 3));
+		
 		livraria.getClientes().get(0).getCesta().setPendente(false);
-		livraria.getClientes().get(1).getCesta().setPendente(false);
-		livraria.getClientes().get(2).getCesta().setPendente(false);
 
 		
 		visual.Menu.criaMenu(livraria);

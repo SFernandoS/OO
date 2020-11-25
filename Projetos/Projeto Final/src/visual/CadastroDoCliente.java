@@ -85,11 +85,14 @@ public class CadastroDoCliente extends JPanel {
 		confirma.addActionListener(new ActionListener() {
 			//Cria e guarda o Cliente
 			public void actionPerformed(ActionEvent arg0) {
-				if (Validacao.validaCPF(cpf.getText()) && Validacao.validaCEP(cep.getText()) && Validacao.validaNome(nome.getText())) {
+				if (Validacao.validaCPF(cpf.getText(), livraria) && Validacao.validaCEP(cep.getText(), livraria)
+						&& Validacao.validaNome(nome.getText(), livraria)) {
+					
 					livraria.setClientes(
 					Servicos.criaCliente(
 							nome.getText(), Integer.parseInt(cpf.getText()), Integer.parseInt(cep.getText())));
 					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+					
 				}
 			}
 		});

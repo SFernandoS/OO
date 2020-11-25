@@ -2,7 +2,7 @@ package dados;
 
 public class Pessoa {
 	private String nome;
-	private int CPF;
+	private long  CPF;
 	
 	public Pessoa() {}
 	
@@ -18,10 +18,10 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getCPF() {
+	public long getCPF() {
 		return CPF;
 	}
-	public void setCPF(int CPF) {
+	public void setCPF(long CPF) {
 		this.CPF = CPF;
 	}
 }

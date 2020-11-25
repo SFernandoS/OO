@@ -68,7 +68,7 @@ public class Catalogo extends JPanel {
 				catalogoPanel.add(btnConfirmaVenda);
 				btnConfirmaVenda.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						Servicos.confirmaCompra(contenPane, livraria);
 					}
 				});
 		

@@ -101,7 +101,7 @@ public class PagamentosEfetuados extends JPanel {
 					panel.add(cepDoCliente);
 					cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 					
-					JLabel cpfDoCliente = new JLabel(Integer.toString(livraria.getClientes().get(cPagamentos.getSelectedIndex()).getCPF()));
+					JLabel cpfDoCliente = new JLabel(Long.toString(livraria.getClientes().get(cPagamentos.getSelectedIndex()).getCPF()));
 					cpfDoCliente.setBounds(77, 231, 407, 19);
 					panel.add(cpfDoCliente);
 					cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));

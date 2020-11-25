@@ -134,7 +134,7 @@ public class CadastroDeLivro extends JPanel {
 		btnFim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if(Validacao.validaTitulo(textTitulo.getText()) && Validacao.validaIsbn(textISBN.getText()) && Validacao.validaAutor(textAutor.getText())
+					if(Validacao.validaTitulo(textTitulo.getText(), livraria) && Validacao.validaIsbn(textISBN.getText(), livraria) && Validacao.validaAutor(textAutor.getText())
 							&& Validacao.validaEditora(textEditora.getText()) && Validacao.validaPreco(Double.parseDouble(textPreco.getText()))
 							&& Validacao.validaQuantidade(Integer.parseInt(textQuantidade.getText()))){
 						switch (choiceGenero.getSelectedIndex()) { // 0 - infantil; 1 - tecnico; 2 - ficcao, 3 - outros. 

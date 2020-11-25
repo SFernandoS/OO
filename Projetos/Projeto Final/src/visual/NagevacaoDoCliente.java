@@ -19,7 +19,6 @@ public class NagevacaoDoCliente extends JPanel {
 
 	
 	public static void nagevacaoDoCliente(JPanel contenPane, Livraria livraria) {	
-		String nomeDoClienteInput = null;
 		int numeroDoCliente = -1;
 		
 		JPanel clientePanel = new JPanel();
@@ -103,41 +102,20 @@ public class NagevacaoDoCliente extends JPanel {
 		navCliente.show(contenPane, "navCliente");
 		
 		//Encontra o cliente
-		try {
-			nomeDoClienteInput = JOptionPane.showInputDialog("Digite o nome do cliente:");
-			nomeDoClienteInput = nomeDoClienteInput.toLowerCase();
-			nomeDoClienteInput = Character.toUpperCase(nomeDoClienteInput.charAt(0)) + nomeDoClienteInput.substring(1);			
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "entrada invalida");
-			voltaCliente(contenPane);
-		}
-
-		//Guarda o cliente
-		for (int i = 0; i < livraria.getClientes().size(); i++)
-			if (nomeDoClienteInput.equals(livraria.getClientes().get(i).getNome())){
-				numeroDoCliente = i;
-			}
-		
-		//Verifica se encontrou o cliente
-		if (numeroDoCliente == -1) {
-			JOptionPane.showMessageDialog(null, "Cliente nao encontrado");
-			CardLayout cadastro = (CardLayout) (contenPane.getLayout());
-			cadastro.show(contenPane, "catalogo");
-		}
-	
+		numeroDoCliente = Servicos.procuraCliente(livraria, contenPane);
 		
 		//Panel: Infantil
-				infantilPanel(contenPane, clientePanel, livraria, numeroDoCliente);
+		infantilPanel(contenPane, clientePanel, livraria, numeroDoCliente);
 
-				//Panel Ficcao
-				ficcaoPanel(contenPane, clientePanel, livraria, numeroDoCliente);
+		//Panel Ficcao
+		ficcaoPanel(contenPane, clientePanel, livraria, numeroDoCliente);
 				
-				// Panel tecnico
-				tecnicoPanel(contenPane, clientePanel, livraria, numeroDoCliente);
+		// Panel tecnico
+		tecnicoPanel(contenPane, clientePanel, livraria, numeroDoCliente);
 				
 				
-				//Panel: Outros
-				outrosPanel(contenPane, clientePanel, livraria, numeroDoCliente);
+		//Panel: Outros
+		outrosPanel(contenPane, clientePanel, livraria, numeroDoCliente);
 		
 			
 	}
