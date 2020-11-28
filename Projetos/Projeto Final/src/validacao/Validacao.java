@@ -9,8 +9,8 @@ public class Validacao {
 	// Cliente
 	public static boolean validaCPF(String cpf, Livraria livraria) {
 		try {
-			if (Long.parseLong(cpf) < 99999999 || Long.parseLong(cpf) > 999999999) {
-				JOptionPane.showMessageDialog(null, "O CPF tem que ter 9 digitos!");
+			if (cpf.length() != 11) {
+				JOptionPane.showMessageDialog(null, "O CPF tem que ter 11 digitos!");
 				return false;
 			}
 			
@@ -30,7 +30,7 @@ public class Validacao {
 	
 	public static boolean validaCEP(String cep, Livraria livraria) {
 		try {
-			if (Integer.parseInt(cep) < 9999999 || Integer.parseInt(cep) > 99999999 ) {
+			if (cep.length() != 8 ) {
 				JOptionPane.showMessageDialog(null, "O CEP tem que ter 8 digitos!");
 				return false;
 			}

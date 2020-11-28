@@ -90,7 +90,7 @@ public class CadastroDoCliente extends JPanel {
 					
 					livraria.setClientes(
 					Servicos.criaCliente(
-							nome.getText(), Integer.parseInt(cpf.getText()), Integer.parseInt(cep.getText())));
+							nome.getText(), cpf.getText(), cep.getText()));
 					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 					
 				}

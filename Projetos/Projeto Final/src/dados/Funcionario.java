@@ -10,7 +10,7 @@ public class Funcionario extends Pessoa{
 		super();
 	}
 
-	public Funcionario(String nome, int CPF) {
+	public Funcionario(String nome, String CPF) {
 		super(nome, CPF);
 		vendas = new ArrayList<Cesta>();
 	}

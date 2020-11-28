@@ -28,7 +28,7 @@ public class Menu extends JFrame{
 			public void run() {
 				try {
 					Menu frame = new Menu(livraria);
-					frame.setResizable(true);
+					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

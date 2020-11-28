@@ -14,8 +14,7 @@ import dados.Livraria;
 
 @SuppressWarnings("serial")
 public class Estoque extends JPanel {
-	public static void criaEstoque(JPanel contenPane, Livraria livraria) {	
-		
+	public static void criaEstoque(JPanel contenPane, Livraria livraria) {		
 		JPanel estoquePanel = new JPanel();
 		contenPane.add(estoquePanel, "estoque");
 		estoquePanel.setLayout(null);
@@ -151,11 +150,7 @@ public class Estoque extends JPanel {
 			choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
 			
 		
-		//Panel do resultado da busca
-		
-		
-	
-			
+		//Panel do resultado da busca	
 		JButton btnPesquisaInfantil = new JButton("Pesquisar");
 		btnPesquisaInfantil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -168,46 +163,8 @@ public class Estoque extends JPanel {
 				
 				if (choiceInfantil.getSelectedIndex() == - 1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
-				else {
-					JLabel lblTitulo = new JLabel("Titulo: "
-					+ livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getTitulo());
-					lblTitulo.setBounds(10, 25, 534, 22);
-					panelPesquisaInfantil.add(lblTitulo);
-					lblTitulo.setForeground(Color.DARK_GRAY);
-					
-					JLabel lblIsbn = new JLabel("ISBN: " 
-					+ livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getIsbn());
-					lblIsbn.setBounds(10, 82, 534, 22);
-					panelPesquisaInfantil.add(lblIsbn);
-					lblIsbn.setForeground(Color.DARK_GRAY);
-					
-					JLabel lblAutor = new JLabel("Autor: " +
-					livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getAutor());
-					lblAutor.setBounds(10, 134, 534, 22);
-					panelPesquisaInfantil.add(lblAutor);
-					lblAutor.setForeground(Color.DARK_GRAY);
-					
-					JLabel lblEditora = new JLabel("Editora: " +
-					livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getEditora());
-					lblEditora.setBounds(10, 186, 534, 22);
-					panelPesquisaInfantil.add(lblEditora);
-					lblEditora.setForeground(Color.DARK_GRAY);
-					
-					JLabel lblQuantidade = new JLabel("Quantidade: "
-					+ livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getQuantidade());
-					lblQuantidade.setBounds(10, 234, 534, 22);
-					panelPesquisaInfantil.add(lblQuantidade);
-					lblQuantidade.setForeground(Color.DARK_GRAY);
-					
-					JLabel lblPreco = new JLabel("Preco: " 
-					+ livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getPreco());
-					lblPreco.setBounds(10, 280, 534, 22);
-					panelPesquisaInfantil.add(lblPreco);
-					lblPreco.setForeground(Color.DARK_GRAY);
-				}
-			
-
-				
+				else 
+					livraria.getCatalogo().relacaoDeLivrosInfantil(livraria, choiceInfantil, panelPesquisaInfantil);
 			}
 		});
 		btnPesquisaInfantil.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -233,60 +190,16 @@ public class Estoque extends JPanel {
 		ficcao.add(choiceFiccao);
 		
 		//adiona os nomes do titulo em choice
-				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++) 
-					choiceFiccao.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+				for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++) 
+					choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
 		
 		JButton btnPesquisaFiccao = new JButton("Pesquisar");
 		btnPesquisaFiccao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceFiccao.getSelectedIndex() == - 1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
-				else {
-					
-					
-					JPanel panelPesquisaFiccao = new JPanel();
-					panelPesquisaFiccao.setBackground(new Color(204, 204, 153));
-					panelPesquisaFiccao.setBounds(10, 214, 554, 326);
-					ficcao.add(panelPesquisaFiccao);
-					ficcao.setLayout(null);
-					
-					JLabel lblTitulo = new JLabel("Titulo: "
-							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getTitulo());
-							lblTitulo.setBounds(10, 25, 534, 22);
-							panelPesquisaFiccao.add(lblTitulo);
-							lblTitulo.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblIsbn = new JLabel("ISBN: " 
-							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getIsbn());
-							lblIsbn.setBounds(10, 82, 534, 22);
-							panelPesquisaFiccao.add(lblIsbn);
-							lblIsbn.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblAutor = new JLabel("Autor: " +
-							livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getAutor());
-							lblAutor.setBounds(10, 134, 534, 22);
-							panelPesquisaFiccao.add(lblAutor);
-							lblAutor.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblEditora = new JLabel("Editora: " +
-							livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getEditora());
-							lblEditora.setBounds(10, 186, 534, 22);
-							panelPesquisaFiccao.add(lblEditora);
-							lblEditora.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblQuantidade = new JLabel("Quantidade: "
-							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getQuantidade());
-							lblQuantidade.setBounds(10, 234, 534, 22);
-							panelPesquisaFiccao.add(lblQuantidade);
-							lblQuantidade.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblPreco = new JLabel("Preco: " 
-							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getPreco());
-							lblPreco.setBounds(10, 280, 534, 22);
-							panelPesquisaFiccao.add(lblPreco);
-							lblPreco.setForeground(Color.DARK_GRAY);
-				}
-				
+				else
+				livraria.getCatalogo().relacaoDeLivrosFiccao(livraria, choiceFiccao, ficcao);
 			}
 		});
 		btnPesquisaFiccao.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -312,58 +225,16 @@ public class Estoque extends JPanel {
 		tecnico.add(choiceTecnico);
 		
 		//adiona os nomes do titulo em choice
-				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++) 
-					choiceTecnico.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+				for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++) 
+					choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
 		
 		JButton btnPesquisaTecnico = new JButton("Pesquisar");
 		btnPesquisaTecnico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceTecnico.getSelectedIndex() == - 1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
-				else {
-					
-					JPanel panelPesquisaTecnico = new JPanel();
-					panelPesquisaTecnico.setBackground(new Color(204, 204, 153));
-					panelPesquisaTecnico.setBounds(10, 214, 554, 326);
-					tecnico.add(panelPesquisaTecnico);
-					tecnico.setLayout(null);
-					
-					JLabel lblTitulo = new JLabel("Titulo: "
-							+ livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getTitulo());
-							lblTitulo.setBounds(10, 25, 534, 22);
-							panelPesquisaTecnico.add(lblTitulo);
-							lblTitulo.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblIsbn = new JLabel("ISBN: " 
-							+ livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getIsbn());
-							lblIsbn.setBounds(10, 82, 534, 22);
-							panelPesquisaTecnico.add(lblIsbn);
-							lblIsbn.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblAutor = new JLabel("Autor: " +
-							livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getAutor());
-							lblAutor.setBounds(10, 134, 534, 22);
-							panelPesquisaTecnico.add(lblAutor);
-							lblAutor.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblEditora = new JLabel("Editora: " +
-							livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getEditora());
-							lblEditora.setBounds(10, 186, 534, 22);
-							panelPesquisaTecnico.add(lblEditora);
-							lblEditora.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblQuantidade = new JLabel("Quantidade: "
-							+ livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getQuantidade());
-							lblQuantidade.setBounds(10, 234, 534, 22);
-							panelPesquisaTecnico.add(lblQuantidade);
-							lblQuantidade.setForeground(Color.DARK_GRAY);
-							
-							JLabel lblPreco = new JLabel("Preco: " 
-							+ livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getPreco());
-							lblPreco.setBounds(10, 280, 534, 22);
-							panelPesquisaTecnico.add(lblPreco);
-							lblPreco.setForeground(Color.DARK_GRAY);
-				}
+				else 
+					livraria.getCatalogo().relacaoDeLivrosTecnico(livraria, choiceTecnico, tecnico);
 			}
 		});
 		btnPesquisaTecnico.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -387,10 +258,12 @@ public class Estoque extends JPanel {
 		Choice choiceOutros = new Choice();
 		choiceOutros.setBounds(10, 121, 554, 20);
 		outros.add(choiceOutros);
+		
 	
+		
 		//adiona os nomes do titulo em choice
-				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++) 
-					choiceOutros.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+				for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++) 
+					choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
 		
 		JButton btnPesquisaOutros = new JButton("Pesquisar");
 		btnPesquisaOutros.addActionListener(new ActionListener() {
@@ -403,42 +276,9 @@ public class Estoque extends JPanel {
 					panelPesquisaOutros.setBackground(new Color(204, 204, 153));
 					panelPesquisaOutros.setBounds(10, 214, 554, 326);
 					outros.add(panelPesquisaOutros);
-					outros.setLayout(null);
-				JLabel lblTitulo = new JLabel("Titulo: "
-						+ livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getTitulo());
-						lblTitulo.setBounds(10, 25, 534, 22);
-						panelPesquisaOutros.add(lblTitulo);
-						lblTitulo.setForeground(Color.DARK_GRAY);
-						
-						JLabel lblIsbn = new JLabel("ISBN: " 
-						+ livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getIsbn());
-						lblIsbn.setBounds(10, 82, 534, 22);
-						panelPesquisaOutros.add(lblIsbn);
-						lblIsbn.setForeground(Color.DARK_GRAY);
-						
-						JLabel lblAutor = new JLabel("Autor: " +
-						livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getAutor());
-						lblAutor.setBounds(10, 134, 534, 22);
-						panelPesquisaOutros.add(lblAutor);
-						lblAutor.setForeground(Color.DARK_GRAY);
-						
-						JLabel lblEditora = new JLabel("Editora: " +
-						livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getEditora());
-						lblEditora.setBounds(10, 186, 534, 22);
-						panelPesquisaOutros.add(lblEditora);
-						lblEditora.setForeground(Color.DARK_GRAY);
-						
-						JLabel lblQuantidade = new JLabel("Quantidade: "
-						+ livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getQuantidade());
-						lblQuantidade.setBounds(10, 234, 534, 22);
-						panelPesquisaOutros.add(lblQuantidade);
-						lblQuantidade.setForeground(Color.DARK_GRAY);
-						
-						JLabel lblPreco = new JLabel("Preco: " 
-						+ livraria.getCatalogo().getTecnico().get(choiceOutros.getSelectedIndex()).getPreco());
-						lblPreco.setBounds(10, 280, 534, 22);
-						panelPesquisaOutros.add(lblPreco);
-						lblPreco.setForeground(Color.DARK_GRAY);
+					panelPesquisaOutros.setLayout(null);
+					
+					livraria.getCatalogo().relacaoDeLivrosOutros(livraria, choiceOutros, panelPesquisaOutros);
 				}
 			}
 		});
@@ -446,5 +286,6 @@ public class Estoque extends JPanel {
 		btnPesquisaOutros.setBounds(223, 157, 127, 25);
 		outros.add(btnPesquisaOutros);
 	}
+
 }
 

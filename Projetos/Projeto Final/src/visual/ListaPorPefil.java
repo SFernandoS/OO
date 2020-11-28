@@ -192,7 +192,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaFiccao.setBackground(new Color(204, 204, 153));
 		panelPesquisaFiccao.setBounds(10, 214, 554, 326);
 		ficcao.add(panelPesquisaFiccao);
-		ficcao.setLayout(null);
+		panelPesquisaFiccao.setLayout(null);
 	
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
 			if (livraria.getClientes().get(i).calculaPerfil() == 1)
@@ -233,7 +233,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaTecnico.setBackground(new Color(204, 204, 153));
 		panelPesquisaTecnico.setBounds(10, 214, 554, 326);
 		tecnico.add(panelPesquisaTecnico);
-		tecnico.setLayout(null);
+		panelPesquisaTecnico.setLayout(null);
 		
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
 			if (livraria.getClientes().get(i).calculaPerfil() == 2)
@@ -274,7 +274,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaOutros.setBackground(new Color(204, 204, 153));
 		panelPesquisaOutros.setBounds(10, 214, 554, 326);
 		outros.add(panelPesquisaOutros);
-		outros.setLayout(null);
+		panelPesquisaOutros.setLayout(null);
 	
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
 			if (livraria.getClientes().get(i).calculaPerfil() == 3)
@@ -296,6 +296,8 @@ public class ListaPorPefil extends JPanel {
 	
 	//Mostra os clientes
 	public static void imprimeCliente(JPanel panel, Livraria livraria, Choice lista) {
+		panel.removeAll();
+		
 		JLabel lblNome = new JLabel("Nome: ");
 		lblNome.setBounds(10, 45, 66, 27);
 		panel.add(lblNome);
@@ -315,16 +317,16 @@ public class ListaPorPefil extends JPanel {
 		lblCEP.setForeground(Color.DARK_GRAY);
 		
 		JLabel nomeDoCliente = new JLabel(livraria.getClientes().get(lista.getSelectedIndex()).getNome());
-		nomeDoCliente.setBounds(77, 47, 83, 22);
+		nomeDoCliente.setBounds(77, 47, 547, 22);
 		panel.add(nomeDoCliente);
 		nomeDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		
-		JLabel cepDoCliente = new JLabel(Integer.toString(livraria.getClientes().get(lista.getSelectedIndex()).getCEP()));
+		JLabel cepDoCliente = new JLabel((livraria.getClientes().get(lista.getSelectedIndex()).getCEP()));
 		cepDoCliente.setBounds(77, 139, 407, 21);
 		panel.add(cepDoCliente);
 		cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		
-		JLabel cpfDoCliente = new JLabel(Long.toString(livraria.getClientes().get(lista.getSelectedIndex()).getCPF()));
+		JLabel cpfDoCliente = new JLabel(livraria.getClientes().get(lista.getSelectedIndex()).getCPF());
 		cpfDoCliente.setBounds(77, 231, 417, 19);
 		panel.add(cpfDoCliente);
 		cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));

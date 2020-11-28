@@ -1,76 +1,78 @@
 package dados;
 
-
-
 public class Cliente extends Pessoa {
-	private int [] perfil;
-	private int CEP;
+	private int[] perfil;
+	private String CEP;
 	private double frete;
 	private Cesta cesta;
-	
+
 	public Cliente() {
 		super();
 	}
-	
-	public Cliente (String nome, int CPF, int CEP, double frete) {
-		super(nome,CPF);
+
+	public Cliente(String nome, String CPF, String CEP, double frete) {
+		super(nome, CPF);
 		this.CEP = CEP;
 		this.frete = frete;
-		this.perfil = new int [4];
+		this.perfil = new int[4];
 		this.cesta = new Cesta();
 	}
-	
-	
-	public int getCEP() {
+
+	public String getCEP() {
 		return CEP;
 	}
-	public void setCEP(int CEP) {
+
+	public void setCEP(String CEP) {
 		this.CEP = CEP;
 	}
+
 	public double getFrete() {
 		return frete;
 	}
+
 	public void setFrete(double frete) {
 		this.frete = frete;
 	}
+
 	public Cesta getCesta() {
 		return cesta;
 	}
+
 	public void setCesta(Cesta cesta) {
 		this.cesta = cesta;
 	}
 
 	public int calculaPerfil() {
-			
+
 		for (int i = 0; i < cesta.getItens().size(); i++) {
 			switch (cesta.getItens().get(i).getGenero()) {
 			case 1:
-				perfil[0] ++;
+				perfil[0]++;
 				break;
 			case 2:
-				perfil[1] ++;
+				perfil[1]++;
 				break;
 			case 3:
-				perfil[2] ++;
+				perfil[2]++;
 				break;
 			default:
-				perfil[3] ++;
+				perfil[3]++;
 				break;
 			}
 		}
-		
-		if (perfil[0] > perfil [1] && perfil[0] > perfil [2] && perfil[0] > perfil [3])
-			return 0; //infantil
-		else if (perfil[1] > perfil [0] && perfil[1] > perfil [2] && perfil[1] > perfil [3])
-			return 1; //tecnico
-		else if (perfil[2] > perfil [1] && perfil[2] > perfil [0] && perfil[2] > perfil [3])
-			return 2; //ficcao
-		else if (perfil[3] > perfil [1] && perfil[3] > perfil [2] && perfil[3] > perfil [0])
-			return 3; //outros
+
+		if (perfil[0] > perfil[1] && perfil[0] > perfil[2] && perfil[0] > perfil[3])
+			return 0; // infantil
+		else if (perfil[1] > perfil[0] && perfil[1] > perfil[2] && perfil[1] > perfil[3])
+			return 1; // tecnico
+		else if (perfil[2] > perfil[1] && perfil[2] > perfil[0] && perfil[2] > perfil[3])
+			return 2; // ficcao
+		else if (perfil[3] > perfil[1] && perfil[3] > perfil[2] && perfil[3] > perfil[0])
+			return 3; // outros
 		else
 			return -1;
 	}
-	
+
 	public String getPerfil() {
 		switch (calculaPerfil()) {
 		case 0:

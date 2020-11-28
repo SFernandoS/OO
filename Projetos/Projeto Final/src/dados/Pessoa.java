@@ -2,11 +2,11 @@ package dados;
 
 public class Pessoa {
 	private String nome;
-	private long  CPF;
+	private String  CPF;
 	
 	public Pessoa() {}
 	
-	public Pessoa(String nome, int CPF) {
+	public Pessoa(String nome, String CPF) {
 		super();
 		this.nome = nome;
 		this.CPF = CPF;
@@ -18,10 +18,10 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public long getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(long CPF) {
+	public void setCPF(String CPF) {
 		this.CPF = CPF;
 	}
 }
