@@ -14,24 +14,9 @@ import javax.swing.JPanel;
 
 import dados.Livraria;
 
-/**
- * Navegação do visistante, funciona quase igual a Navegação do cliente, mas ser
- * apenas para visualização
- * 
- * @author Fernando Vargas
- * @version 1.0 (nov 2020)
- */
-
 @SuppressWarnings("serial")
 public class NavegacaoDoVisitante extends JPanel {
 
-	/**
-	 * É um submenu que serve para a navegação de livros por gênero, ou seja, opções
-	 * de gênero, mas só serve para a navegação
-	 * 
-	 * @param contenPane
-	 * @param livraria
-	 */
 	public static void criaNavegacaoDoVisitante(JPanel contenPane, Livraria livraria) {
 
 		JPanel visitantePanel = new JPanel();
@@ -127,13 +112,6 @@ public class NavegacaoDoVisitante extends JPanel {
 	}
 
 	// Volta para um Panel
-	/**
-	 * Método que cria um botão no Panel para voltar para o Panel de Inicio do
-	 * Visitante
-	 * 
-	 * @param visitantePanel
-	 * @return
-	 */
 	public static JButton voltaVisitante(JPanel visitantePanel) {
 		JButton btnvoltaVisitante = new JButton("Voltar");
 		btnvoltaVisitante.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -149,14 +127,6 @@ public class NavegacaoDoVisitante extends JPanel {
 	}
 
 	// Panel infantil
-	/**
-	 * Panel que serve para pesquisar e mostrar os livros infantis Tem um botão para
-	 * ir Cadastrar o Cliente
-	 * 
-	 * @param contentPane
-	 * @param visitantePanel
-	 * @param livraria
-	 */
 	public static void infantilPanel(JPanel contentPane, JPanel visitantePanel, Livraria livraria) {
 		JPanel infantil = new JPanel();
 		infantil.setBackground(new Color(204, 204, 102));
@@ -191,9 +161,9 @@ public class NavegacaoDoVisitante extends JPanel {
 				if (choiceInfantil.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-
+					
 					panelPesquisaInfantil.removeAll();
-
+					
 					JLabel lblTitulo = new JLabel("Titulo: "
 							+ livraria.getCatalogo().getInfantil().get(choiceInfantil.getSelectedIndex()).getTitulo());
 					lblTitulo.setBounds(10, 25, 534, 22);
@@ -249,14 +219,6 @@ public class NavegacaoDoVisitante extends JPanel {
 	}
 
 	// Panel ficcao
-	/**
-	 * Panel que serve para pesquisar e mostrar os livros de ficcao Tem um botão
-	 * para ir Cadastrar o Cliente
-	 * 
-	 * @param contentPane
-	 * @param visitantePanel
-	 * @param livraria
-	 */
 	public static void ficcaoPanel(JPanel contentPane, JPanel visitantePanel, Livraria livraria) {
 		JPanel ficcao = new JPanel();
 		ficcao.setBackground(new Color(204, 204, 102));
@@ -289,9 +251,9 @@ public class NavegacaoDoVisitante extends JPanel {
 				if (choiceFiccao.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-
+					
 					panelPesquisaFiccao.removeAll();
-
+					
 					JLabel lblTitulo = new JLabel("Titulo: "
 							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getTitulo());
 					lblTitulo.setBounds(10, 25, 534, 22);
@@ -316,8 +278,8 @@ public class NavegacaoDoVisitante extends JPanel {
 					panelPesquisaFiccao.add(lblEditora);
 					lblEditora.setForeground(Color.DARK_GRAY);
 
-					JLabel lblQuantidade = new JLabel("Quantidade: "
-							+ livraria.getCatalogo().getFiccao().get(choiceFiccao.getSelectedIndex()).getQuantidade());
+					JLabel lblQuantidade = new JLabel("Quantidade: " + livraria.getCatalogo().getFiccao()
+							.get(choiceFiccao.getSelectedIndex()).getQuantidade());
 					lblQuantidade.setBounds(10, 234, 534, 22);
 					panelPesquisaFiccao.add(lblQuantidade);
 					lblQuantidade.setForeground(Color.DARK_GRAY);
@@ -346,14 +308,6 @@ public class NavegacaoDoVisitante extends JPanel {
 	}
 
 	// Panel tecnico
-	/**
-	 * Panel que serve para pesquisar e mostrar os livros tecnicos Tem um botão para
-	 * ir Cadastrar o Cliente
-	 * 
-	 * @param contentPane
-	 * @param visitantePanel
-	 * @param livraria
-	 */
 	public static void tecnicoPanel(JPanel contentPane, JPanel visitantePanel, Livraria livraria) {
 		JPanel tecnico = new JPanel();
 		tecnico.setBackground(new Color(204, 204, 102));
@@ -387,7 +341,7 @@ public class NavegacaoDoVisitante extends JPanel {
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
 					panelPesquisaTecnico.removeAll();
-
+					
 					JLabel lblTitulo = new JLabel("Titulo: "
 							+ livraria.getCatalogo().getTecnico().get(choiceTecnico.getSelectedIndex()).getTitulo());
 					lblTitulo.setBounds(10, 25, 534, 22);
@@ -443,14 +397,6 @@ public class NavegacaoDoVisitante extends JPanel {
 	}
 
 	// Panel outros
-	/**
-	 * Panel que serve para pesquisar e mostrar os livros "outros" Tem um botão para
-	 * ir Cadastrar o Cliente
-	 * 
-	 * @param contentPane
-	 * @param visitantePanel
-	 * @param livraria
-	 */
 	public static void outrosPanel(JPanel contentPane, JPanel visitantePanel, Livraria livraria) {
 		JPanel outros = new JPanel();
 		outros.setBackground(new Color(204, 204, 102));
@@ -484,7 +430,7 @@ public class NavegacaoDoVisitante extends JPanel {
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
 					panelPesquisaOutros.removeAll();
-
+					
 					JLabel lblTitulo = new JLabel("Titulo: "
 							+ livraria.getCatalogo().getOutros().get(choiceOutros.getSelectedIndex()).getTitulo());
 					lblTitulo.setBounds(10, 25, 534, 22);
