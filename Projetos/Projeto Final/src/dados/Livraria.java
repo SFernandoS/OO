@@ -11,11 +11,11 @@ import javax.swing.JPanel;
 public class Livraria extends Catalogo{
 	private Catalogo catalogo;
 	private ArrayList<Cliente> clientes;
-	private ArrayList<Funcionario> funcionarios;
+	private Funcionario funcionario;
 	
 	public Livraria() {
 		this.clientes = new ArrayList<Cliente>();
-		this.funcionarios = new ArrayList<Funcionario>();
+		this.funcionario = new Funcionario();
 		this.catalogo = new Catalogo();
 	}
 	
@@ -26,14 +26,10 @@ public class Livraria extends Catalogo{
 	public void setClientes(Cliente novoCliente) {
 		clientes.add(novoCliente);
 	}
-	public ArrayList<Funcionario> getFuncionarios() {
-		return funcionarios;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setFuncionarios(Funcionario novoFuncionario) {
-		funcionarios.add(novoFuncionario);
-	}
-	
 	public Catalogo getCatalogo() {
 		return catalogo;
 	}

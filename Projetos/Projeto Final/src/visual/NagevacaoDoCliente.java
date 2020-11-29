@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.AncestorListener;
+
 import dados.Livraria;
 import servicos.Servicos;
 
@@ -147,11 +149,18 @@ public class NagevacaoDoCliente extends JPanel {
 		Choice choiceInfantil = new Choice();
 		choiceInfantil.setBounds(10, 121, 554, 20);
 		infantil.add(choiceInfantil);
-		
+
 		JButton btnComprar = new JButton("Comprar");
 		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnComprar.setBounds(325, 157, 190, 25);
 		infantil.add(btnComprar);
+		btnComprar.setVisible(false);
+
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceInfantil.getSelectedIndex());
+			}
+		});
 
 		// Panel do resultado da busca
 		JPanel panelPesquisaInfantil = new JPanel();
@@ -159,7 +168,7 @@ public class NagevacaoDoCliente extends JPanel {
 		panelPesquisaInfantil.setBounds(10, 214, 554, 500);
 		infantil.add(panelPesquisaInfantil);
 		panelPesquisaInfantil.setLayout(null);
-		
+
 		// adiciona os nomes do titulo em choice
 		for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
 			choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
@@ -170,7 +179,7 @@ public class NagevacaoDoCliente extends JPanel {
 				if (choiceInfantil.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-					
+					btnComprar.setVisible(true);
 					panelPesquisaInfantil.removeAll();
 
 					JLabel lblTitulo = new JLabel("Titulo: "
@@ -208,13 +217,6 @@ public class NagevacaoDoCliente extends JPanel {
 					lblPreco.setBounds(10, 260, 534, 22);
 					panelPesquisaInfantil.add(lblPreco);
 					lblPreco.setForeground(Color.DARK_GRAY);
-
-					btnComprar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							Servicos.cadastraCompra(livraria, numeroDoCliente, choiceInfantil.getSelectedIndex());
-						}
-					});
-
 				}
 			}
 		});
@@ -244,6 +246,12 @@ public class NagevacaoDoCliente extends JPanel {
 		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnComprar.setBounds(325, 157, 190, 25);
 		ficcao.add(btnComprar);
+		btnComprar.setVisible(false);
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceFiccao.getSelectedIndex());
+			}
+		});
 
 		JPanel panelPesquisaFiccao = new JPanel();
 		panelPesquisaFiccao.setBackground(new Color(204, 204, 153));
@@ -261,7 +269,7 @@ public class NagevacaoDoCliente extends JPanel {
 				if (choiceFiccao.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-					
+					btnComprar.setVisible(true);
 					panelPesquisaFiccao.removeAll();
 
 					JLabel lblTitulo = new JLabel("Titulo: "
@@ -299,12 +307,6 @@ public class NagevacaoDoCliente extends JPanel {
 					lblPreco.setBounds(10, 280, 534, 22);
 					panelPesquisaFiccao.add(lblPreco);
 					lblPreco.setForeground(Color.DARK_GRAY);
-
-					btnComprar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-						}
-					});
-
 				}
 
 			}
@@ -331,7 +333,7 @@ public class NagevacaoDoCliente extends JPanel {
 		Choice choiceTecnico = new Choice();
 		choiceTecnico.setBounds(10, 121, 554, 20);
 		tecnico.add(choiceTecnico);
-		
+
 		JPanel panelPesquisaTecnico = new JPanel();
 		panelPesquisaTecnico.setBackground(new Color(204, 204, 153));
 		panelPesquisaTecnico.setBounds(10, 214, 554, 326);
@@ -346,6 +348,12 @@ public class NagevacaoDoCliente extends JPanel {
 		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnComprar.setBounds(325, 157, 190, 25);
 		tecnico.add(btnComprar);
+		btnComprar.setVisible(false);
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceTecnico.getSelectedIndex());
+			}
+		});
 
 		JButton btnPesquisaTecnico = new JButton("Pesquisar");
 		btnPesquisaTecnico.addActionListener(new ActionListener() {
@@ -353,7 +361,7 @@ public class NagevacaoDoCliente extends JPanel {
 				if (choiceTecnico.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-					
+					btnComprar.setVisible(true);
 					panelPesquisaTecnico.removeAll();
 
 					JLabel lblTitulo = new JLabel("Titulo: "
@@ -392,10 +400,6 @@ public class NagevacaoDoCliente extends JPanel {
 					panelPesquisaTecnico.add(lblPreco);
 					lblPreco.setForeground(Color.DARK_GRAY);
 
-					btnComprar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-						}
-					});
 				}
 			}
 		});
@@ -426,7 +430,13 @@ public class NagevacaoDoCliente extends JPanel {
 		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnComprar.setBounds(325, 157, 190, 25);
 		outros.add(btnComprar);
-		
+		btnComprar.setVisible(false);
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceOutros.getSelectedIndex());
+			}
+		});
+
 		JPanel panelPesquisaOutros = new JPanel();
 		panelPesquisaOutros.setBackground(new Color(204, 204, 153));
 		panelPesquisaOutros.setBounds(10, 214, 554, 326);
@@ -443,7 +453,7 @@ public class NagevacaoDoCliente extends JPanel {
 				if (choiceOutros.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há livros cadastrados!");
 				else {
-					
+					btnComprar.setVisible(true);
 					panelPesquisaOutros.removeAll();
 
 					JLabel lblTitulo = new JLabel("Titulo: "
@@ -481,11 +491,6 @@ public class NagevacaoDoCliente extends JPanel {
 					lblPreco.setBounds(10, 280, 534, 22);
 					panelPesquisaOutros.add(lblPreco);
 					lblPreco.setForeground(Color.DARK_GRAY);
-
-					btnComprar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-						}
-					});
 
 				}
 			}

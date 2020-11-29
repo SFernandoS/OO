@@ -8,12 +8,11 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import com.sun.tools.javac.Main;
-
 import dados.Cliente;
 import dados.Livraria;
 import dados.Livro;
+import dados.Pedidos;
 
 public class Servicos extends Main {
 
@@ -30,6 +29,17 @@ public class Servicos extends Main {
 		return novoLivro;
 	}
 
+	
+	public static Pedidos novoPedido(Cliente cliente) {
+		Pedidos pedido = new Pedidos(cliente);
+		return pedido;
+	}
+	
+	public static Pedidos novoPedido(Cliente cliente, boolean confirma) {
+		Pedidos pedido = new Pedidos(cliente, confirma);
+		return pedido;
+	}
+	
 	public static void cadastraCompra(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
@@ -61,8 +71,14 @@ public class Servicos extends Main {
 
 		escolha = JOptionPane.showConfirmDialog(null, "Deseja confimar a compra?", null, escolha);
 
-		if (escolha == 0)
-			livraria.getClientes().get(numeroDoCliente).getCesta().setPendente(false);
+		if (escolha == 0) 
+			livraria.getFuncionario().setVendas(novoPedido(livraria.getClientes().get(numeroDoCliente), true));
+		else
+			livraria.getFuncionario().setVendas(novoPedido(livraria.getClientes().get(numeroDoCliente)));
+		
+		livraria.getClientes().get(numeroDoCliente).getCesta().limpaCesta();
+		livraria.getClientes().get(numeroDoCliente).getCesta().setTotal();
+		
 	}
 
 	public static void confirmaCompra(JPanel contenPane, Livraria livraria) {
@@ -76,8 +92,8 @@ public class Servicos extends Main {
 			nomeDoClienteInput = Character.toUpperCase(nomeDoClienteInput.charAt(0)) + nomeDoClienteInput.substring(1);
 
 			// Guarda o cliente
-			for (int i = 0; i < livraria.getClientes().size(); i++)
-				if (nomeDoClienteInput.equals(livraria.getClientes().get(i).getNome())) {
+			for (int i = 0; i < livraria.getFuncionario().getVendas().size(); i++)
+				if (nomeDoClienteInput.equals(livraria.getFuncionario().getVendas().get(0).getPedido().getNome())) {
 					numeroDoCliente = i;
 				}
 
@@ -87,13 +103,12 @@ public class Servicos extends Main {
 				CardLayout cadastro = (CardLayout) (contenPane.getLayout());
 				cadastro.show(contenPane, "catalogo");
 			} else {
-				livraria.getClientes().get(numeroDoCliente).getCesta().setPendente(false);
+				livraria.getFuncionario().getVendas().get(numeroDoCliente).setConfirma();
 				JOptionPane.showMessageDialog(null, "Venda confirmada com sucesso");
 			}
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "entrada invalida");
-			// voltaCliente(contenPane);
 		}
 	}
 
@@ -134,9 +149,8 @@ public class Servicos extends Main {
 	}
 
 	public static void mostraPagamentosEfetuados(JPanel panel, Livraria livraria, Choice cPagamentos) {
-		int numeroDoCliente = procuraCliente(livraria, cPagamentos.getSelectedItem());
-		panel.removeAll();
-
+		//panel.removeAll();
+		
 		JLabel lblNome = new JLabel("Nome: ");
 		lblNome.setBounds(10, 45, 66, 27);
 		panel.add(lblNome);
@@ -161,23 +175,23 @@ public class Servicos extends Main {
 		lblPagamento.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		lblPagamento.setForeground(Color.DARK_GRAY);
 
-		JLabel nomeDoCliente = new JLabel(livraria.getClientes().get(numeroDoCliente).getNome());
+		JLabel nomeDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getNome());
 		nomeDoCliente.setBounds(77, 47, 407, 22);
 		panel.add(nomeDoCliente);
 		nomeDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 
-		JLabel cepDoCliente = new JLabel(livraria.getClientes().get(numeroDoCliente).getCEP());
+		JLabel cepDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCEP());
 		cepDoCliente.setBounds(77, 139, 407, 21);
 		panel.add(cepDoCliente);
 		cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 
-		JLabel cpfDoCliente = new JLabel(livraria.getClientes().get(numeroDoCliente).getCPF());
+		JLabel cpfDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCPF());
 		cpfDoCliente.setBounds(77, 231, 407, 19);
 		panel.add(cpfDoCliente);
 		cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 
 		JLabel pagamentoDoCliente = new JLabel(
-				Double.toString(livraria.getClientes().get(numeroDoCliente).getCesta().getTotal()));
+				Double.toString(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getTotal()));
 		pagamentoDoCliente.setBounds(120, 300, 360, 19);
 		panel.add(pagamentoDoCliente);
 		pagamentoDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));

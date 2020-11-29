@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 
 public class Funcionario extends Pessoa{
-	private ArrayList<Cesta> vendas;
+	private ArrayList<Pedidos> vendas;
 
 	public Funcionario() {
 		super();
+		this.vendas = new ArrayList<Pedidos>();
 	}
 
 	public Funcionario(String nome, String CPF) {
 		super(nome, CPF);
-		vendas = new ArrayList<Cesta>();
 	}
 	
-	public ArrayList<Cesta> getVendas() {
+	public ArrayList<Pedidos> getVendas() {
 		return vendas;
 	}
 
-	public void setVendas(Cesta novoPedido) {
-		vendas.add(novoPedido);
+	public void setVendas(Pedidos novaVenda) {
+		vendas.add(novaVenda);
 	}
 }

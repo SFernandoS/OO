@@ -48,13 +48,13 @@ public class PagamentosEfetuados extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 204, 153));
-		panel.setBounds(50, 203, 550, 550);
+		panel.setBounds(10, 203, 550, 550);
 		pagamentosPanel.add(panel);
 		panel.setLayout(null);
 
-		for (int i = 0; i < livraria.getClientes().size(); i++) {
-			if (!livraria.getClientes().get(i).getCesta().isPendente()) {
-				cPagamentos.add(livraria.getClientes().get(i).getNome());
+		for (int i = 0; i < livraria.getFuncionario().getVendas().size(); i++) {
+			if (livraria.getFuncionario().getVendas().get(i).getConfirma()) {
+				cPagamentos.add(livraria.getFuncionario().getVendas().get(i).getPedido().getNome());
 			}
 		}
 
@@ -65,7 +65,51 @@ public class PagamentosEfetuados extends JPanel {
 				if (cPagamentos.getSelectedIndex() == -1)
 					JOptionPane.showMessageDialog(null, "Nao há clientes cadastrados!");
 				else {
-					Servicos.mostraPagamentosEfetuados(panel, livraria, cPagamentos);
+					panel.removeAll();
+					JLabel lblNome = new JLabel("Nome: ");
+					lblNome.setBounds(10, 45, 66, 27);
+					panel.add(lblNome);
+					lblNome.setForeground(Color.DARK_GRAY);
+					lblNome.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+
+					JLabel lblCPF = new JLabel("CPF:");
+					lblCPF.setBounds(10, 136, 100, 27);
+					panel.add(lblCPF);
+					lblCPF.setForeground(Color.DARK_GRAY);
+					lblCPF.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+
+					JLabel lblCEP = new JLabel("CEP:");
+					lblCEP.setBounds(10, 230, 100, 20);
+					panel.add(lblCEP);
+					lblCEP.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+					lblCEP.setForeground(Color.DARK_GRAY);
+
+					JLabel lblPagamento = new JLabel("Pagamento:");
+					lblPagamento.setBounds(10, 300, 400, 19);
+					panel.add(lblPagamento);
+					lblPagamento.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+					lblPagamento.setForeground(Color.DARK_GRAY);
+
+					JLabel nomeDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getNome());
+					nomeDoCliente.setBounds(77, 47, 407, 22);
+					panel.add(nomeDoCliente);
+					nomeDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+
+					JLabel cepDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCEP());
+					cepDoCliente.setBounds(77, 139, 407, 21);
+					panel.add(cepDoCliente);
+					cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+
+					JLabel cpfDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCPF());
+					cpfDoCliente.setBounds(77, 231, 407, 19);
+					panel.add(cpfDoCliente);
+					cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+
+					JLabel pagamentoDoCliente = new JLabel(
+							Double.toString(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getTotal()));
+					pagamentoDoCliente.setBounds(120, 300, 360, 19);
+					panel.add(pagamentoDoCliente);
+					pagamentoDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 				}
 			}
 		});

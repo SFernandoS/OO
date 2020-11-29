@@ -6,12 +6,10 @@ public class Cesta {
 	private ArrayList<Livro> itens;
 	private String endereco;
 	private double total;
-	private boolean pendente;
 
 	public Cesta() {
 		this.itens = new ArrayList<Livro>();
 		this.total = 0;
-		this.setPendente(true);
 	}
 
 	public ArrayList<Livro> getItens() {
@@ -56,14 +54,11 @@ public class Cesta {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	public boolean isPendente() {
-		return pendente;
-	}
-
-	public void setPendente(boolean pendente) {
-		this.pendente = pendente;
-	}
 	
+	public void limpaCesta() {
+		itens.clear();
+		this.total = 0;
+		this.endereco = "";
+	}
 }
 
