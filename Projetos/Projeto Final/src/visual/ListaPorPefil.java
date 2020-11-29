@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import dados.Livraria;
+import servicos.Servicos;
 
 @SuppressWarnings("serial")
 public class ListaPorPefil extends JPanel {
@@ -153,7 +154,7 @@ public class ListaPorPefil extends JPanel {
 		infantil.add(choiceInfantil);
 		
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
-			if (livraria.getClientes().get(i).calculaPerfil() == 0)
+			if (livraria.getClientes().get(i).getPerfil() == 0)
 				choiceInfantil.add(livraria.getClientes().get(i).getNome());
 	
 			
@@ -195,7 +196,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaFiccao.setLayout(null);
 	
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
-			if (livraria.getClientes().get(i).calculaPerfil() == 1)
+			if (livraria.getClientes().get(i).getPerfil() == 1)
 				choiceFiccao.add(livraria.getClientes().get(i).getNome());
 		
 		JButton btnPesquisaFiccao = new JButton("Pesquisar");
@@ -236,7 +237,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaTecnico.setLayout(null);
 		
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
-			if (livraria.getClientes().get(i).calculaPerfil() == 2)
+			if (livraria.getClientes().get(i).getPerfil() == 2)
 				choiceTecnico.add(livraria.getClientes().get(i).getNome());
 		
 		JButton btnPesquisaTecnico = new JButton("Pesquisar");
@@ -277,7 +278,7 @@ public class ListaPorPefil extends JPanel {
 		panelPesquisaOutros.setLayout(null);
 	
 		for (int i = 0; i < livraria.getClientes().size(); i++) 
-			if (livraria.getClientes().get(i).calculaPerfil() == 3)
+			if (livraria.getClientes().get(i).getPerfil() == 3)
 				choiceOutros.add(livraria.getClientes().get(i).getNome());
 		
 		JButton btnPesquisaOutros = new JButton("Pesquisar");
@@ -296,6 +297,7 @@ public class ListaPorPefil extends JPanel {
 	
 	//Mostra os clientes
 	public static void imprimeCliente(JPanel panel, Livraria livraria, Choice lista) {
+		int numeroDoCliente = Servicos.procuraCliente(livraria, lista.getSelectedItem());
 		panel.removeAll();
 		
 		JLabel lblNome = new JLabel("Nome: ");
@@ -316,17 +318,17 @@ public class ListaPorPefil extends JPanel {
 		lblCEP.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		lblCEP.setForeground(Color.DARK_GRAY);
 		
-		JLabel nomeDoCliente = new JLabel(livraria.getClientes().get(lista.getSelectedIndex()).getNome());
+		JLabel nomeDoCliente = new JLabel(livraria.getClientes().get(numeroDoCliente).getNome());
 		nomeDoCliente.setBounds(77, 47, 547, 22);
 		panel.add(nomeDoCliente);
 		nomeDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		
-		JLabel cepDoCliente = new JLabel((livraria.getClientes().get(lista.getSelectedIndex()).getCEP()));
+		JLabel cepDoCliente = new JLabel((livraria.getClientes().get(numeroDoCliente).getCEP()));
 		cepDoCliente.setBounds(77, 139, 407, 21);
 		panel.add(cepDoCliente);
 		cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		
-		JLabel cpfDoCliente = new JLabel(livraria.getClientes().get(lista.getSelectedIndex()).getCPF());
+		JLabel cpfDoCliente = new JLabel(livraria.getClientes().get(numeroDoCliente).getCPF());
 		cpfDoCliente.setBounds(77, 231, 417, 19);
 		panel.add(cpfDoCliente);
 		cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));

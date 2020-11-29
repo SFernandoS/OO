@@ -22,4 +22,8 @@ public class Funcionario extends Pessoa{
 	public void setVendas(Pedidos novaVenda) {
 		vendas.add(novaVenda);
 	}
+	
+	public void vendaExpirada(int posicao) {
+		vendas.remove(posicao);
+	}
 }

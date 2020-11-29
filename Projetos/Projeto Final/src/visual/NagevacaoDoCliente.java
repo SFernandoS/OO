@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.event.AncestorListener;
 
 import dados.Livraria;
 import servicos.Servicos;
@@ -115,7 +114,6 @@ public class NagevacaoDoCliente extends JPanel {
 
 		// Panel: Outros
 		outrosPanel(contenPane, clientePanel, livraria, numeroDoCliente);
-
 	}
 
 	// Volta para um Panel
@@ -158,7 +156,7 @@ public class NagevacaoDoCliente extends JPanel {
 
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceInfantil.getSelectedIndex());
+				Servicos.cadastraCompraInfantil(livraria, numeroDoCliente, choiceInfantil.getSelectedIndex());
 			}
 		});
 
@@ -173,7 +171,61 @@ public class NagevacaoDoCliente extends JPanel {
 		for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
 			choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
 
-		JButton btnPesquisaInfantil = new JButton("Pesquisar");
+		JButton btnPesquisa = new JButton("Pesquisar");
+		btnPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pesquisar = JOptionPane.showInputDialog("Digite o titulo, autor, editora ou ISBN:  ");
+				choiceInfantil.removeAll();
+				// procura por titulos infantis
+				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
+					if (livraria.getCatalogo().getInfantil().get(i).getTitulo().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+					}
+
+				// procura por autores infantis
+				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
+					if (livraria.getCatalogo().getInfantil().get(i).getAutor().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceInfantil.getItemCount(); j++) {
+							if (livraria.getCatalogo().getInfantil().get(i).getAutor()
+									.equals(choiceInfantil.getItem(j))) {
+								choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por ISBN infantis
+				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
+					if (livraria.getCatalogo().getInfantil().get(i).getIsbn().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceInfantil.getItemCount(); j++) {
+							if (livraria.getCatalogo().getInfantil().get(i).getIsbn()
+									.equals(choiceInfantil.getItem(j))) {
+								choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por Editoras infantis
+				for (int i = 0; i < livraria.getCatalogo().getInfantil().size(); i++)
+					if (livraria.getCatalogo().getInfantil().get(i).getEditora().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceInfantil.getItemCount(); j++) {
+							if (livraria.getCatalogo().getInfantil().get(i).getEditora()
+									.equals(choiceInfantil.getItem(j))) {
+								choiceInfantil.add(livraria.getCatalogo().getInfantil().get(i).getTitulo());
+							}
+						}
+					}
+
+			}
+		});
+		btnPesquisa.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+		btnPesquisa.setBounds(200, 90, 190, 25);
+		infantil.add(btnPesquisa);
+
+		JButton btnPesquisaInfantil = new JButton("Escolher");
 		btnPesquisaInfantil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceInfantil.getSelectedIndex() == -1)
@@ -249,7 +301,7 @@ public class NagevacaoDoCliente extends JPanel {
 		btnComprar.setVisible(false);
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceFiccao.getSelectedIndex());
+				Servicos.cadastraCompraFiccao(livraria, numeroDoCliente, choiceFiccao.getSelectedIndex());
 			}
 		});
 
@@ -263,7 +315,59 @@ public class NagevacaoDoCliente extends JPanel {
 		for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++)
 			choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
 
-		JButton btnPesquisaFiccao = new JButton("Pesquisar");
+		JButton btnPesquisa = new JButton("Pesquisar");
+		btnPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pesquisar = JOptionPane.showInputDialog("Digite o titulo, autor, editora ou ISBN:  ");
+
+				choiceFiccao.removeAll();
+				// procura por titulos infantis
+				for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++)
+					if (livraria.getCatalogo().getFiccao().get(i).getTitulo().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
+					}
+
+				// procura por autores infantis
+				for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++)
+					if (livraria.getCatalogo().getFiccao().get(i).getAutor().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceFiccao.getItemCount(); j++) {
+							if (livraria.getCatalogo().getFiccao().get(i).getAutor().equals(choiceFiccao.getItem(j))) {
+								choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por ISBN infantis
+				for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++)
+					if (livraria.getCatalogo().getFiccao().get(i).getIsbn().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceFiccao.getItemCount(); j++) {
+							if (livraria.getCatalogo().getFiccao().get(i).getIsbn().equals(choiceFiccao.getItem(j))) {
+								choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por Editoras infantis
+				for (int i = 0; i < livraria.getCatalogo().getFiccao().size(); i++)
+					if (livraria.getCatalogo().getFiccao().get(i).getEditora().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceFiccao.getItemCount(); j++) {
+							if (livraria.getCatalogo().getFiccao().get(i).getEditora()
+									.equals(choiceFiccao.getItem(j))) {
+								choiceFiccao.add(livraria.getCatalogo().getFiccao().get(i).getTitulo());
+							}
+						}
+					}
+			}
+		});
+		btnPesquisa.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+		btnPesquisa.setBounds(200, 90, 190, 25);
+		ficcao.add(btnPesquisa);
+
+		JButton btnPesquisaFiccao = new JButton("Escolher");
 		btnPesquisaFiccao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceFiccao.getSelectedIndex() == -1)
@@ -334,6 +438,17 @@ public class NagevacaoDoCliente extends JPanel {
 		choiceTecnico.setBounds(10, 121, 554, 20);
 		tecnico.add(choiceTecnico);
 
+		JButton btnComprar = new JButton("Comprar");
+		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+		btnComprar.setBounds(325, 157, 190, 25);
+		tecnico.add(btnComprar);
+		btnComprar.setVisible(false);
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Servicos.cadastraCompraTecnico(livraria, numeroDoCliente, choiceTecnico.getSelectedIndex());
+			}
+		});
+
 		JPanel panelPesquisaTecnico = new JPanel();
 		panelPesquisaTecnico.setBackground(new Color(204, 204, 153));
 		panelPesquisaTecnico.setBounds(10, 214, 554, 326);
@@ -344,18 +459,59 @@ public class NagevacaoDoCliente extends JPanel {
 		for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++)
 			choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
 
-		JButton btnComprar = new JButton("Comprar");
-		btnComprar.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
-		btnComprar.setBounds(325, 157, 190, 25);
-		tecnico.add(btnComprar);
-		btnComprar.setVisible(false);
-		btnComprar.addActionListener(new ActionListener() {
+		JButton btnPesquisa = new JButton("Pesquisar");
+		btnPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceTecnico.getSelectedIndex());
+				String pesquisar = JOptionPane.showInputDialog("Digite o titulo, autor, editora ou ISBN:  ");
+				choiceTecnico.removeAll();
+				// procura por titulos infantis
+				for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++)
+					if (livraria.getCatalogo().getTecnico().get(i).getTitulo().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
+					}
+
+				// procura por autores infantis
+				for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++)
+					if (livraria.getCatalogo().getTecnico().get(i).getAutor().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceTecnico.getItemCount(); j++) {
+							if (livraria.getCatalogo().getTecnico().get(i).getAutor()
+									.equals(choiceTecnico.getItem(j))) {
+								choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por ISBN infantis
+				for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++)
+					if (livraria.getCatalogo().getTecnico().get(i).getIsbn().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceTecnico.getItemCount(); j++) {
+							if (livraria.getCatalogo().getTecnico().get(i).getIsbn().equals(choiceTecnico.getItem(j))) {
+								choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por Editoras infantis
+				for (int i = 0; i < livraria.getCatalogo().getTecnico().size(); i++)
+					if (livraria.getCatalogo().getTecnico().get(i).getEditora().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceTecnico.getItemCount(); j++) {
+							if (livraria.getCatalogo().getTecnico().get(i).getEditora()
+									.equals(choiceTecnico.getItem(j))) {
+								choiceTecnico.add(livraria.getCatalogo().getTecnico().get(i).getTitulo());
+							}
+						}
+					}
 			}
 		});
+		btnPesquisa.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+		btnPesquisa.setBounds(200, 90, 190, 25);
+		tecnico.add(btnPesquisa);
 
-		JButton btnPesquisaTecnico = new JButton("Pesquisar");
+		JButton btnPesquisaTecnico = new JButton("Escolher");
 		btnPesquisaTecnico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceTecnico.getSelectedIndex() == -1)
@@ -433,7 +589,7 @@ public class NagevacaoDoCliente extends JPanel {
 		btnComprar.setVisible(false);
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Servicos.cadastraCompra(livraria, numeroDoCliente, choiceOutros.getSelectedIndex());
+				Servicos.cadastraCompraOutros(livraria, numeroDoCliente, choiceOutros.getSelectedIndex());
 			}
 		});
 
@@ -447,7 +603,59 @@ public class NagevacaoDoCliente extends JPanel {
 		for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++)
 			choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
 
-		JButton btnPesquisaOutros = new JButton("Pesquisar");
+		JButton btnPesquisa = new JButton("Pesquisar");
+		btnPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pesquisar = JOptionPane.showInputDialog("Digite o titulo, autor, editora ou ISBN:  ");
+
+				choiceOutros.removeAll();
+				// procura por titulos infantis
+				for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++)
+					if (livraria.getCatalogo().getOutros().get(i).getTitulo().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
+					}
+
+				// procura por autores infantis
+				for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++)
+					if (livraria.getCatalogo().getOutros().get(i).getAutor().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceOutros.getItemCount(); j++) {
+							if (livraria.getCatalogo().getOutros().get(i).getAutor().equals(choiceOutros.getItem(j))) {
+								choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por ISBN infantis
+				for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++)
+					if (livraria.getCatalogo().getOutros().get(i).getIsbn().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceOutros.getItemCount(); j++) {
+							if (livraria.getCatalogo().getOutros().get(i).getIsbn().equals(choiceOutros.getItem(j))) {
+								choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
+							}
+						}
+					}
+
+				// procura por Editoras infantis
+				for (int i = 0; i < livraria.getCatalogo().getOutros().size(); i++)
+					if (livraria.getCatalogo().getOutros().get(i).getEditora().toLowerCase()
+							.contains(pesquisar.toLowerCase())) {
+						for (int j = 0; j < choiceOutros.getItemCount(); j++) {
+							if (livraria.getCatalogo().getOutros().get(i).getEditora()
+									.equals(choiceOutros.getItem(j))) {
+								choiceOutros.add(livraria.getCatalogo().getOutros().get(i).getTitulo());
+							}
+						}
+					}
+			}
+		});
+		btnPesquisa.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
+		btnPesquisa.setBounds(200, 90, 190, 25);
+		outros.add(btnPesquisa);
+
+		JButton btnPesquisaOutros = new JButton("Escolher");
 		btnPesquisaOutros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (choiceOutros.getSelectedIndex() == -1)
@@ -498,6 +706,5 @@ public class NagevacaoDoCliente extends JPanel {
 		btnPesquisaOutros.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		btnPesquisaOutros.setBounds(75, 157, 190, 25);
 		outros.add(btnPesquisaOutros);
-
 	}
 }

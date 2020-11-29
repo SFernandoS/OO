@@ -173,4 +173,13 @@ public class Validacao {
 		else
 			return true;
 	}
+
+	public static boolean validaEndereco(String endereco) {
+		if (endereco.length() < 1) {
+			JOptionPane.showMessageDialog(null, "O endereco nao pode ficar vazio!");
+			return false;
+		}
+		else
+			return true;
+	}
 }

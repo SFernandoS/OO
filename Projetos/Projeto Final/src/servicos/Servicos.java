@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDate;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import dados.Cliente;
 import dados.Livraria;
 import dados.Livro;
 import dados.Pedidos;
+import validacao.Validacao;
 
 public class Servicos extends Main {
 
@@ -29,24 +31,70 @@ public class Servicos extends Main {
 		return novoLivro;
 	}
 
-	
 	public static Pedidos novoPedido(Cliente cliente) {
 		Pedidos pedido = new Pedidos(cliente);
 		return pedido;
 	}
-	
+
 	public static Pedidos novoPedido(Cliente cliente, boolean confirma) {
 		Pedidos pedido = new Pedidos(cliente, confirma);
 		return pedido;
 	}
-	
-	public static void cadastraCompra(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
+
+	public static void cadastraCompraInfantil(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
 
 		livraria.getClientes().get(numeroDoCliente).getCesta()
 				.setItens(livraria.getCatalogo().getInfantil().get(indexDoChoice));
 		JOptionPane.showMessageDialog(null, "Compra realizada com sucesso");
+
+		livraria.getClientes().get(numeroDoCliente).setPerfil(0);
+
+		escolha = JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?", null, escolha);
+		if (escolha == JOptionPane.YES_OPTION)
+			finalizaCompra(livraria, numeroDoCliente);
+	}
+
+	public static void cadastraCompraFiccao(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
+
+		int escolha = JOptionPane.YES_NO_OPTION;
+
+		livraria.getClientes().get(numeroDoCliente).getCesta()
+				.setItens(livraria.getCatalogo().getFiccao().get(indexDoChoice));
+		JOptionPane.showMessageDialog(null, "Compra realizada com sucesso");
+
+		livraria.getClientes().get(numeroDoCliente).setPerfil(1);
+
+		escolha = JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?", null, escolha);
+		if (escolha == JOptionPane.YES_OPTION)
+			finalizaCompra(livraria, numeroDoCliente);
+	}
+
+	public static void cadastraCompraTecnico(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
+
+		int escolha = JOptionPane.YES_NO_OPTION;
+
+		livraria.getClientes().get(numeroDoCliente).getCesta()
+				.setItens(livraria.getCatalogo().getTecnico().get(indexDoChoice));
+		JOptionPane.showMessageDialog(null, "Compra realizada com sucesso");
+
+		livraria.getClientes().get(numeroDoCliente).setPerfil(2);
+
+		escolha = JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?", null, escolha);
+		if (escolha == JOptionPane.YES_OPTION)
+			finalizaCompra(livraria, numeroDoCliente);
+	}
+
+	public static void cadastraCompraOutros(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
+
+		int escolha = JOptionPane.YES_NO_OPTION;
+
+		livraria.getClientes().get(numeroDoCliente).getCesta()
+				.setItens(livraria.getCatalogo().getOutros().get(indexDoChoice));
+		JOptionPane.showMessageDialog(null, "Compra realizada com sucesso");
+
+		livraria.getClientes().get(numeroDoCliente).setPerfil(3);
 
 		escolha = JOptionPane.showConfirmDialog(null, "Deseja finalizar a compra?", null, escolha);
 		if (escolha == JOptionPane.YES_OPTION)
@@ -55,9 +103,12 @@ public class Servicos extends Main {
 
 	public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 		int escolha = JOptionPane.YES_OPTION;
-
-		String endereco = JOptionPane.showInputDialog("Endereco completo: ");
 		String[] pagamentoOpcoes = { "Dinheiro", "Cartao" };
+		String endereco;
+
+		do {
+			endereco = JOptionPane.showInputDialog("Endereco completo: ");
+		} while (!Validacao.validaEndereco(endereco));
 
 		int pagamento = JOptionPane.showOptionDialog(null, "Formas de pagamentos: (Dinheiro -10%)", null,
 				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, pagamentoOpcoes, null);
@@ -71,14 +122,14 @@ public class Servicos extends Main {
 
 		escolha = JOptionPane.showConfirmDialog(null, "Deseja confimar a compra?", null, escolha);
 
-		if (escolha == 0) 
+		if (escolha == 0)
 			livraria.getFuncionario().setVendas(novoPedido(livraria.getClientes().get(numeroDoCliente), true));
 		else
 			livraria.getFuncionario().setVendas(novoPedido(livraria.getClientes().get(numeroDoCliente)));
-		
+
 		livraria.getClientes().get(numeroDoCliente).getCesta().limpaCesta();
 		livraria.getClientes().get(numeroDoCliente).getCesta().setTotal();
-		
+
 	}
 
 	public static void confirmaCompra(JPanel contenPane, Livraria livraria) {
@@ -149,8 +200,8 @@ public class Servicos extends Main {
 	}
 
 	public static void mostraPagamentosEfetuados(JPanel panel, Livraria livraria, Choice cPagamentos) {
-		//panel.removeAll();
-		
+		// panel.removeAll();
+
 		JLabel lblNome = new JLabel("Nome: ");
 		lblNome.setBounds(10, 45, 66, 27);
 		panel.add(lblNome);
@@ -175,17 +226,20 @@ public class Servicos extends Main {
 		lblPagamento.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		lblPagamento.setForeground(Color.DARK_GRAY);
 
-		JLabel nomeDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getNome());
+		JLabel nomeDoCliente = new JLabel(
+				livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getNome());
 		nomeDoCliente.setBounds(77, 47, 407, 22);
 		panel.add(nomeDoCliente);
 		nomeDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 
-		JLabel cepDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCEP());
+		JLabel cepDoCliente = new JLabel(
+				livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCEP());
 		cepDoCliente.setBounds(77, 139, 407, 21);
 		panel.add(cepDoCliente);
 		cepDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 
-		JLabel cpfDoCliente = new JLabel(livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCPF());
+		JLabel cpfDoCliente = new JLabel(
+				livraria.getFuncionario().getVendas().get(cPagamentos.getSelectedIndex()).getPedido().getCPF());
 		cpfDoCliente.setBounds(77, 231, 407, 19);
 		panel.add(cpfDoCliente);
 		cpfDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -197,4 +251,11 @@ public class Servicos extends Main {
 		pagamentoDoCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 	}
 
+	public static void verificaPedidosExpirados(Livraria livraria) {
+		for (int i = 0; i < livraria.getFuncionario().getVendas().size(); i++) {
+			if (livraria.getFuncionario().getVendas().get(i).getValidade() == LocalDate.now()) {
+				livraria.getFuncionario().vendaExpirada(i);
+			}
+		}
+	}
 }

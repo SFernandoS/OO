@@ -1,7 +1,7 @@
 package dados;
 
 public class Cliente extends Pessoa {
-	private int[] perfil;
+	private int perfil;
 	private String CEP;
 	private double frete;
 	private Cesta cesta;
@@ -14,7 +14,7 @@ public class Cliente extends Pessoa {
 		super(nome, CPF);
 		this.CEP = CEP;
 		this.frete = frete;
-		this.perfil = new int[4];
+		this.perfil = -1;
 		this.cesta = new Cesta();
 	}
 
@@ -42,49 +42,11 @@ public class Cliente extends Pessoa {
 		this.cesta = cesta;
 	}
 
-	public int calculaPerfil() {
-
-		for (int i = 0; i < cesta.getItens().size(); i++) {
-			switch (cesta.getItens().get(i).getGenero()) {
-			case 1:
-				perfil[0]++;
-				break;
-			case 2:
-				perfil[1]++;
-				break;
-			case 3:
-				perfil[2]++;
-				break;
-			default:
-				perfil[3]++;
-				break;
-			}
-		}
-
-		if (perfil[0] > perfil[1] && perfil[0] > perfil[2] && perfil[0] > perfil[3])
-			return 0; // infantil
-		else if (perfil[1] > perfil[0] && perfil[1] > perfil[2] && perfil[1] > perfil[3])
-			return 1; // tecnico
-		else if (perfil[2] > perfil[1] && perfil[2] > perfil[0] && perfil[2] > perfil[3])
-			return 2; // ficcao
-		else if (perfil[3] > perfil[1] && perfil[3] > perfil[2] && perfil[3] > perfil[0])
-			return 3; // outros
-		else
-			return -1;
+	public void setPerfil(int perfil) {
+		this.perfil = perfil;
 	}
 
-	public String getPerfil() {
-		switch (calculaPerfil()) {
-		case 0:
-			return "Infantil";
-		case 1:
-			return "Tecnico";
-		case 2:
-			return "Ficcao";
-		case 3:
-			return "outros";
-		default:
-			return "Sem perfil";
-		}
+	public int getPerfil() {
+		return perfil;
 	}
 }
