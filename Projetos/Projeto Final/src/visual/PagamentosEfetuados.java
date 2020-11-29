@@ -16,9 +16,22 @@ import javax.swing.JPanel;
 import dados.Livraria;
 import servicos.Servicos;
 
+/**
+ * mostra todos os pagamentos efetuados
+ * 
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
+
 @SuppressWarnings("serial")
 public class PagamentosEfetuados extends JPanel {
 
+	/**
+	 * Um Panel que mostra todos os pagamentos efetuados
+	 * 
+	 * @param contenPane
+	 * @param livraria
+	 */
 	public static void criaPagamentosEfetuados(JPanel contenPane, Livraria livraria) {
 
 		JPanel pagamentosPanel = new JPanel();

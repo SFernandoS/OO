@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Catalogo: aqui ficam todos os livros
+ * 
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
 public class Catalogo {
 	private ArrayList<Livro> infantil;
 	private ArrayList<Livro> tecnico;
@@ -52,6 +58,11 @@ public class Catalogo {
 		outros.add(novoLivroOutros);
 	}
 
+	/**
+	 * Mostra todos os livros cadastrados no Terminal, não está sendo instânciado no
+	 * programa, mas acho legal ter caso queiramos visualizar os livros cadastrados
+	 * de uma maneira fácil, facilitando a manutenção
+	 */
 	public void relacaoDeLivros() {
 
 		System.out.println("Relacao de Livros: \n");
@@ -114,9 +125,16 @@ public class Catalogo {
 		System.out.println("\nTotal de livros: " + (infantil.size() + tecnico.size() + ficcao.size() + outros.size()));
 	}
 
+	/**
+	 * Printa os livros infantis no Panel
+	 * 
+	 * @param livraria
+	 * @param escolha
+	 * @param pesquisa
+	 */
 	public void relacaoDeLivrosInfantil(Livraria livraria, Choice escolha, JPanel pesquisa) {
 		pesquisa.removeAll();
-		
+
 		JLabel lblTitulo = new JLabel(
 				"Titulo: " + livraria.getCatalogo().getInfantil().get(escolha.getSelectedIndex()).getTitulo());
 		lblTitulo.setBounds(10, 25, 534, 22);
@@ -154,9 +172,16 @@ public class Catalogo {
 		lblPreco.setForeground(Color.DARK_GRAY);
 	}
 
+	/**
+	 * printa os livros de ficcao no Panel
+	 * 
+	 * @param livraria
+	 * @param escolha
+	 * @param pesquisa
+	 */
 	public void relacaoDeLivrosFiccao(Livraria livraria, Choice escolha, JPanel pesquisa) {
 		pesquisa.removeAll();
-		
+
 		JLabel lblTitulo = new JLabel(
 				"Titulo: " + livraria.getCatalogo().getFiccao().get(escolha.getSelectedIndex()).getTitulo());
 		lblTitulo.setBounds(10, 25, 534, 22);
@@ -194,9 +219,16 @@ public class Catalogo {
 		lblPreco.setForeground(Color.DARK_GRAY);
 	}
 
+	/**
+	 * printa os livros tecnicos no Panel
+	 * 
+	 * @param livraria
+	 * @param escolha
+	 * @param pesquisa
+	 */
 	public void relacaoDeLivrosTecnico(Livraria livraria, Choice escolha, JPanel pesquisa) {
 		pesquisa.removeAll();
-		
+
 		JLabel lblTitulo = new JLabel(
 				"Titulo: " + livraria.getCatalogo().getTecnico().get(escolha.getSelectedIndex()).getTitulo());
 		lblTitulo.setBounds(10, 25, 534, 22);
@@ -234,9 +266,16 @@ public class Catalogo {
 		lblPreco.setForeground(Color.DARK_GRAY);
 	}
 
+	/**
+	 * printa a categoria de livros "outros" no panel
+	 * 
+	 * @param livraria
+	 * @param escolha
+	 * @param pesquisa
+	 */
 	public void relacaoDeLivrosOutros(Livraria livraria, Choice escolha, JPanel pesquisa) {
 		pesquisa.removeAll();
-		
+
 		JLabel lblTitulo = new JLabel(
 				"Titulo: " + livraria.getCatalogo().getOutros().get(escolha.getSelectedIndex()).getTitulo());
 		lblTitulo.setBounds(10, 25, 534, 22);

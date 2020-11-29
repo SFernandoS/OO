@@ -17,13 +17,25 @@ import java.awt.CardLayout;
 import java.awt.Panel;
 import javax.swing.JButton;
 
+/**
+ * Menu, parte principal do Visual do programa, é o Layout que chama os outros
+ * Cards
+ * 
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
+
 @SuppressWarnings("serial")
-public class Menu extends JFrame{
+public class Menu extends JFrame {
 
 	private JPanel contenPane;
 
+	/**
+	 * Instância do menu
+	 * 
+	 * @param livraria
+	 */
 	public static void criaMenu(Livraria livraria) {
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -36,10 +48,13 @@ public class Menu extends JFrame{
 			}
 		});
 	}
-	
 
+	/**
+	 * Parte visual do menu e menu para se comunicar com todos os outros panels
+	 * 
+	 * @param livraria
+	 */
 	public Menu(Livraria livraria) {
-	
 		setTitle("Livraria 'Menu'");
 		setBounds(100, 100, 600, 600);
 		contenPane = new JPanel();
@@ -47,21 +62,21 @@ public class Menu extends JFrame{
 		contenPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenPane);
 		contenPane.setLayout(new CardLayout(0, 0));
-		
+
 		/*
-		 * 			INICIO
+		 * INICIO
 		 */
-		
+
 		Panel inicio = new Panel();
 		contenPane.add(inicio, "inicio");
 		inicio.setLayout(null);
-		
+
 		JLabel welcome = new JLabel("Bem vindo(a)");
 		welcome.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 40));
 		welcome.setBounds(157, 35, 259, 40);
 		inicio.add(welcome);
-		
-		//Catálogo
+
+		// Catálogo
 		JButton catalogo = new JButton("Catalogo");
 		catalogo.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		inicio.add(catalogo);
@@ -71,8 +86,8 @@ public class Menu extends JFrame{
 				Catalogo.criaCatalogo(contenPane, livraria);
 			}
 		});
-		
-		//Estoque
+
+		// Estoque
 		JButton livroEstoque = new JButton("Estoque");
 		livroEstoque.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		livroEstoque.addActionListener(new ActionListener() {
@@ -82,8 +97,8 @@ public class Menu extends JFrame{
 		});
 		livroEstoque.setBounds(117, 475, 350, 50);
 		inicio.add(livroEstoque);
-		
-		//Clientes cadastrados
+
+		// Clientes cadastrados
 		JButton clienteCadastrados = new JButton("Cadastrados");
 		clienteCadastrados.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		clienteCadastrados.addActionListener(new ActionListener() {
@@ -93,8 +108,8 @@ public class Menu extends JFrame{
 		});
 		clienteCadastrados.setBounds(117, 250, 350, 50);
 		inicio.add(clienteCadastrados);
-		
-		//Pagamentos Efetuados
+
+		// Pagamentos Efetuados
 		JButton pagamentosEfetuados = new JButton("Pagamentos efetuados");
 		pagamentosEfetuados.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		pagamentosEfetuados.addActionListener(new ActionListener() {
@@ -104,8 +119,8 @@ public class Menu extends JFrame{
 		});
 		pagamentosEfetuados.setBounds(117, 325, 350, 50);
 		inicio.add(pagamentosEfetuados);
-		
-		//Lista por perfil
+
+		// Lista por perfil
 		JButton listaPerfil = new JButton("Lista por perfil");
 		listaPerfil.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
 		listaPerfil.addActionListener(new ActionListener() {
@@ -116,7 +131,7 @@ public class Menu extends JFrame{
 		listaPerfil.setBounds(117, 400, 350, 50);
 		inicio.add(listaPerfil);
 
-		//Cadastro de Livro
+		// Cadastro de Livro
 		JButton cadastroLivro = new JButton("Cadastrar livro");
 		cadastroLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -129,4 +144,3 @@ public class Menu extends JFrame{
 
 	}
 }
-

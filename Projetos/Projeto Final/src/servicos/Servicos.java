@@ -1,5 +1,10 @@
 package servicos;
 
+/**
+ * Servicos: Aqui se faz as manipulações secundárias, cria clientes, cadastra livros, faz novos pedidos, etc
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
 import java.awt.CardLayout;
 import java.awt.Choice;
 import java.awt.Color;
@@ -18,6 +23,14 @@ import validacao.Validacao;
 
 public class Servicos extends Main {
 
+	/**
+	 * O método cadastra um cliente na livraria
+	 * 
+	 * @param nome
+	 * @param cep
+	 * @param cpf
+	 * @return Cliente
+	 */
 	public static Cliente criaCliente(String nome, String cep, String cpf) {
 		nome = nome.toLowerCase();
 		nome = Character.toUpperCase(nome.charAt(0)) + nome.substring(1);
@@ -25,22 +38,54 @@ public class Servicos extends Main {
 		return novoCliente;
 	}
 
+	/**
+	 * O método cadastra um livro na livraria
+	 * 
+	 * @param titulo
+	 * @param isbn
+	 * @param autor
+	 * @param editora
+	 * @param preco
+	 * @param genero
+	 * @param quantidade
+	 * @return Livro
+	 */
 	public static Livro cadastraLivro(String titulo, String isbn, String autor, String editora, double preco,
 			int genero, int quantidade) {
 		Livro novoLivro = new Livro(titulo, isbn, autor, editora, preco, genero, quantidade);
 		return novoLivro;
 	}
 
+	/**
+	 * O método faz um novo pedido
+	 * 
+	 * @param cliente
+	 * @return Pedido
+	 */
 	public static Pedidos novoPedido(Cliente cliente) {
 		Pedidos pedido = new Pedidos(cliente);
 		return pedido;
 	}
 
+	/**
+	 * O método faz um novo pedido e confirma-o
+	 * 
+	 * @param cliente
+	 * @param confirma
+	 * @return Pedido
+	 */
 	public static Pedidos novoPedido(Cliente cliente, boolean confirma) {
 		Pedidos pedido = new Pedidos(cliente, confirma);
 		return pedido;
 	}
 
+	/**
+	 * O método cadastra uma compra de livro infantil
+	 * 
+	 * @param livraria
+	 * @param numeroDoCliente
+	 * @param indexDoChoice
+	 */
 	public static void cadastraCompraInfantil(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
@@ -56,6 +101,13 @@ public class Servicos extends Main {
 			finalizaCompra(livraria, numeroDoCliente);
 	}
 
+	/**
+	 * O método cadastra uma compra de livro de ficcao
+	 * 
+	 * @param livraria
+	 * @param numeroDoCliente
+	 * @param indexDoChoice
+	 */
 	public static void cadastraCompraFiccao(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
@@ -71,6 +123,13 @@ public class Servicos extends Main {
 			finalizaCompra(livraria, numeroDoCliente);
 	}
 
+	/**
+	 * O método cadastra a compra de um livro tecnico
+	 * 
+	 * @param livraria
+	 * @param numeroDoCliente
+	 * @param indexDoChoice
+	 */
 	public static void cadastraCompraTecnico(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
@@ -86,6 +145,13 @@ public class Servicos extends Main {
 			finalizaCompra(livraria, numeroDoCliente);
 	}
 
+	/**
+	 * O método cadastra a compra de livro da categoria "outros"
+	 * 
+	 * @param livraria
+	 * @param numeroDoCliente
+	 * @param indexDoChoice
+	 */
 	public static void cadastraCompraOutros(Livraria livraria, int numeroDoCliente, int indexDoChoice) {
 
 		int escolha = JOptionPane.YES_NO_OPTION;
@@ -101,6 +167,13 @@ public class Servicos extends Main {
 			finalizaCompra(livraria, numeroDoCliente);
 	}
 
+	/**
+	 * 1 - Finaliza a compra 2 - Escolhe a forma de pagamentos 3 - Cadastra o
+	 * endereço do cliente 4 - Faz o pedido 5 - limpa a cesta, após o pedido feito
+	 * 
+	 * @param livraria
+	 * @param numeroDoCliente
+	 */
 	public static void finalizaCompra(Livraria livraria, int numeroDoCliente) {
 		int escolha = JOptionPane.YES_OPTION;
 		String[] pagamentoOpcoes = { "Dinheiro", "Cartao" };
@@ -132,6 +205,12 @@ public class Servicos extends Main {
 
 	}
 
+	/**
+	 * Confirma a compra
+	 * 
+	 * @param contenPane
+	 * @param livraria
+	 */
 	public static void confirmaCompra(JPanel contenPane, Livraria livraria) {
 		String nomeDoClienteInput = null;
 		int numeroDoCliente = -1;
@@ -163,6 +242,13 @@ public class Servicos extends Main {
 		}
 	}
 
+	/**
+	 * Procura o cliente e retorna a posição dele no ArrayList
+	 * 
+	 * @param livraria
+	 * @param contenPane
+	 * @return int
+	 */
 	public static int procuraCliente(Livraria livraria, JPanel contenPane) {
 		int numeroDoCliente = -1;
 		String nomeDoClienteInput;
@@ -192,6 +278,13 @@ public class Servicos extends Main {
 		return numeroDoCliente;
 	}
 
+	/**
+	 * Procura o cliente pelo nome e retorna a posição dele no ArrayList
+	 * 
+	 * @param livraria
+	 * @param nome
+	 * @return int
+	 */
 	public static int procuraCliente(Livraria livraria, String nome) {
 		for (int i = 0; i < livraria.getClientes().size(); i++)
 			if (nome.equals(livraria.getClientes().get(i).getNome()))
@@ -199,8 +292,15 @@ public class Servicos extends Main {
 		return 0;
 	}
 
+	/**
+	 * Mostra a lista de pagamentos efetuados no Panel
+	 * 
+	 * @param panel
+	 * @param livraria
+	 * @param cPagamentos
+	 */
 	public static void mostraPagamentosEfetuados(JPanel panel, Livraria livraria, Choice cPagamentos) {
-		// panel.removeAll();
+		panel.removeAll();
 
 		JLabel lblNome = new JLabel("Nome: ");
 		lblNome.setBounds(10, 45, 66, 27);

@@ -1,5 +1,12 @@
 package dados;
 
+/**
+ * Cliente: dados do cliente
+ * 
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
+
 public class Cliente extends Pessoa {
 	private int perfil;
 	private String CEP;

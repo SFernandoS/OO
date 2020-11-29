@@ -15,9 +15,25 @@ import javax.swing.JPanel;
 import dados.Livraria;
 import servicos.Servicos;
 
+/**
+ * Panel da navegação e compra do cliente, uma das partes mais importantes do
+ * programa
+ * 
+ * @author Fernando Vargas
+ * @version 1.0 (nov 2020)
+ */
+
 @SuppressWarnings("serial")
 public class NagevacaoDoCliente extends JPanel {
 
+	/**
+	 * Funciona como um submenu para os gêneros que são representados por botões,
+	 * chamam os outros panels também além de procurar o método para procurar o
+	 * cliente
+	 * 
+	 * @param contenPane
+	 * @param livraria
+	 */
 	public static void nagevacaoDoCliente(JPanel contenPane, Livraria livraria) {
 		int numeroDoCliente = -1;
 
@@ -117,6 +133,12 @@ public class NagevacaoDoCliente extends JPanel {
 	}
 
 	// Volta para um Panel
+	/**
+	 * Cria um botão no panel para voltar para a tela do cliente
+	 * 
+	 * @param clientePanel
+	 * @return
+	 */
 	public static JButton voltaCliente(JPanel clientePanel) {
 		JButton voltaCliente = new JButton("Voltar");
 		voltaCliente.setFont(new Font("Californian FB", Font.BOLD | Font.ITALIC, 18));
@@ -132,6 +154,15 @@ public class NagevacaoDoCliente extends JPanel {
 	}
 
 	// Panel infantil
+	/**
+	 * Panel que mostra os livros, serve para pesquisa e opçções para fazer a compra
+	 * de livros infantis
+	 * 
+	 * @param contentPane
+	 * @param clientePanel
+	 * @param livraria
+	 * @param numeroDoCliente
+	 */
 	public static void infantilPanel(JPanel contentPane, JPanel clientePanel, Livraria livraria, int numeroDoCliente) {
 		JPanel infantil = new JPanel();
 		infantil.setBackground(new Color(204, 204, 102));
@@ -278,6 +309,15 @@ public class NagevacaoDoCliente extends JPanel {
 	}
 
 	// Panel ficcao
+	/**
+	 * Panel que mostra os livros, serve para pesquisa e opçções para fazer a compra
+	 * de livros ficcao
+	 * 
+	 * @param contentPane
+	 * @param clientePanel
+	 * @param livraria
+	 * @param numeroDoCliente
+	 */
 	public static void ficcaoPanel(JPanel contentPane, JPanel clientePanel, Livraria livraria, int numeroDoCliente) {
 		JPanel ficcao = new JPanel();
 		ficcao.setBackground(new Color(204, 204, 102));
@@ -422,6 +462,15 @@ public class NagevacaoDoCliente extends JPanel {
 	}
 
 	// Panel tecnico
+	/**
+	 * Panel que mostra os livros, serve para pesquisa e opçções para fazer a compra
+	 * de livros tecnico
+	 * 
+	 * @param contentPane
+	 * @param clientePanel
+	 * @param livraria
+	 * @param numeroDoCliente
+	 */
 	public static void tecnicoPanel(JPanel contentPane, JPanel clientePanel, Livraria livraria, int numeroDoCliente) {
 		JPanel tecnico = new JPanel();
 		tecnico.setBackground(new Color(204, 204, 102));
@@ -566,6 +615,15 @@ public class NagevacaoDoCliente extends JPanel {
 	}
 
 	// Panel outros
+	/**
+	 * Panel que mostra os livros, serve para pesquisa e opçções para fazer a compra
+	 * de livros "outros"
+	 * 
+	 * @param contentPane
+	 * @param clientePanel
+	 * @param livraria
+	 * @param numeroDoCliente
+	 */
 	public static void outrosPanel(JPanel contentPane, JPanel clientePanel, Livraria livraria, int numeroDoCliente) {
 		JPanel outros = new JPanel();
 		outros.setBackground(new Color(204, 204, 102));
